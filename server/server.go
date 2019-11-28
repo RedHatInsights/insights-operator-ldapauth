@@ -90,7 +90,7 @@ func Initialize(address, ldap string) {
 	router.Use(JwtAuthentication)
 
 	router.HandleFunc(API_PREFIX, mainEndpoint).Methods("GET")
-	router.HandleFunc(API_PREFIX + "login", func(w http.ResponseWriter, r *http.Request) { login(w, r, ldap) }).Methods("POST")
+	router.HandleFunc(API_PREFIX+"login", func(w http.ResponseWriter, r *http.Request) { login(w, r, ldap) }).Methods("POST")
 
 	clientRouter := router.PathPrefix(API_PREFIX + "client").Subrouter()
 	clientRouter.HandleFunc("/cluster", func(w http.ResponseWriter, r *http.Request) { getClusters(w, r) }).Methods("GET")

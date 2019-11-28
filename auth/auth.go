@@ -1,17 +1,16 @@
 package auth
 
 import (
-	"github.com/dgrijalva/jwt-go"
-	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
-	"os"
-	"log"
-	"fmt"
-	"gopkg.in/ldap.v3"
 	"crypto/tls"
 	"errors"
+	"fmt"
+	"github.com/dgrijalva/jwt-go"
+	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
+	"gopkg.in/ldap.v3"
+	"log"
+	"os"
 	"strings"
 )
-
 
 /*
 JWT claims struct
@@ -23,9 +22,9 @@ type Token struct {
 
 //a struct to rep user account
 type Account struct {
-	Login string `json:"login"`
+	Login    string `json:"login"`
 	Password string `json:"password"`
-	Token string `json:"token";sql:"-"`
+	Token    string `json:"token";sql:"-"`
 }
 
 func ldapAuth(login, password, ldapHost string) (bool, error) {
@@ -85,7 +84,7 @@ func ldapAuth(login, password, ldapHost string) (bool, error) {
 }
 
 //Validate incoming user details...
-func Authenticate(login, password, ldap string) (map[string]interface{}) {
+func Authenticate(login, password, ldap string) map[string]interface{} {
 	var err error
 	account := &Account{}
 	account.Login = login

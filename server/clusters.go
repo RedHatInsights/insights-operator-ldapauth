@@ -17,8 +17,8 @@ limitations under the License.
 package server
 
 import (
-	"net/http"
 	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
+	"net/http"
 )
 
 func getClusters(writer http.ResponseWriter, request *http.Request) {
@@ -26,15 +26,15 @@ func getClusters(writer http.ResponseWriter, request *http.Request) {
 	var clusters []map[string]string
 	clusters = append(clusters, map[string]string{
 		"name": "Some1",
-		"id": "1",
+		"id":   "1",
 	})
 	clusters = append(clusters, map[string]string{
 		"name": "Some2",
-		"id": "2",
+		"id":   "2",
 	})
 	clusters = append(clusters, map[string]string{
 		"name": "Some3",
-		"id": "3",
+		"id":   "3",
 	})
 	resp["clusters"] = clusters
 	u.SendResponse(writer, resp)
