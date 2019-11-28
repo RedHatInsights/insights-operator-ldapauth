@@ -1,15 +1,15 @@
 package server
 
 import (
-	"encoding/json"
-	"net/http"
-	"strings"
-	jwt "github.com/dgrijalva/jwt-go"
-	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
-	auth "github.com/redhatinsights/insights-operator-ldapauth/auth"
-	"os"
 	"context"
+	"encoding/json"
 	"fmt"
+	jwt "github.com/dgrijalva/jwt-go"
+	auth "github.com/redhatinsights/insights-operator-ldapauth/auth"
+	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
+	"net/http"
+	"os"
+	"strings"
 )
 
 func login(writer http.ResponseWriter, request *http.Request, ldap string) {
@@ -30,7 +30,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		notAuth := []string{API_PREFIX + "login"} //List of endpoints that doesn't require auth
-		requestPath := r.URL.Path //current request path
+		requestPath := r.URL.Path                 //current request path
 
 		//check if request does not need authentication, serve the request if it doesn't need it
 		for _, value := range notAuth {
@@ -41,7 +41,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 			}
 		}
 
-		response := make(map[string] interface{})
+		response := make(map[string]interface{})
 		tokenHeader := r.Header.Get("Authorization") //Grab the token from the header
 
 		if tokenHeader == "" { //Token is missing, returns with error code 403 Unauthorized
@@ -81,5 +81,5 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 		ctx := context.WithValue(r.Context(), "user", tk.Login)
 		r = r.WithContext(ctx)
 		next.ServeHTTP(w, r) //proceed in the middleware chain!
-	});
+	})
 }
