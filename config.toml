@@ -1,0 +1,3 @@
+[service]
+ldap="ldap.corp.redhat.com"
+address=":8080"
