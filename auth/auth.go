@@ -12,19 +12,17 @@ import (
 	"strings"
 )
 
-/*
-JWT claims struct
-*/
+// Token JWT claims struct
 type Token struct {
 	Login string
 	jwt.StandardClaims
 }
 
-//a struct to rep user account
+// Account a struct to rep user account
 type Account struct {
 	Login    string `json:"login"`
 	Password string `json:"password"`
-	Token    string `json:"token";sql:"-"`
+	Token    string `json:"token"`
 }
 
 func ldapAuth(login, password, ldapHost string) (bool, error) {
@@ -83,7 +81,7 @@ func ldapAuth(login, password, ldapHost string) (bool, error) {
 	return true, nil
 }
 
-//Validate incoming user details...
+// Authenticate - validate user credentials and create auth token
 func Authenticate(login, password, ldap string) map[string]interface{} {
 	var err error
 	account := &Account{}
