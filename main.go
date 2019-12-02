@@ -34,8 +34,11 @@ func main() {
 	flag.Parse()
 
 	serviceCfg := viper.Sub("service")
-	ldap := serviceCfg.GetString("ldap")
-	address := serviceCfg.GetString("address")
+	s := server.Server{
+		LDAP:    serviceCfg.GetString("ldap"),
+		Address: serviceCfg.GetString("address"),
+		Proxy:   serviceCfg.GetString("proxy"),
+	}
 
-	server.Initialize(address, ldap)
+	s.Initialize()
 }

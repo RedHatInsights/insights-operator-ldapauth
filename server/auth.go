@@ -17,7 +17,8 @@ const (
 	contextKeyUser = contextKey("user")
 )
 
-func login(writer http.ResponseWriter, request *http.Request, ldap string) {
+// Login handler for login route
+func (s Server) Login(writer http.ResponseWriter, request *http.Request) {
 	account := &auth.Account{}
 	err := json.NewDecoder(request.Body).Decode(account) //decode the request body into struct and failed if any error occur
 	if err != nil {
@@ -26,14 +27,12 @@ func login(writer http.ResponseWriter, request *http.Request, ldap string) {
 		return
 	}
 
-	resp := auth.Authenticate(account.Login, account.Password, ldap)
+	resp := auth.Authenticate(account.Login, account.Password, s.LDAP)
 	u.SendResponse(writer, resp)
 }
 
-/*
-JwtAuthentication - middleware for authenticate user by Token
-*/
-var JwtAuthentication = func(next http.Handler) http.Handler {
+// JWTAuthentication - middleware for authenticate user by Token
+func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
@@ -87,6 +86,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 		//Everything went well, proceed with the request and set the caller to the user retrieved from the parsed token
 		ctx := context.WithValue(r.Context(), contextKeyUser, tk.Login)
 		r = r.WithContext(ctx)
-		next.ServeHTTP(w, r) //proceed in the middleware chain!
+		// Proceed to proxy
+		next.ServeHTTP(w, r)
 	})
 }

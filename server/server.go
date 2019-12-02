@@ -20,15 +20,20 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"io"
 	"log"
 	"net/http"
 	"os"
-	"time"
 )
 
 // APIPrefix is appended before all REST API endpoint addresses
 const APIPrefix = "/api/v1/"
+
+// Server basic configuration of server
+type Server struct {
+	Address string
+	LDAP    string
+	Proxy   string
+}
 
 var apiRequests = promauto.NewCounterVec(prometheus.CounterOpts{
 	Name: "api_endpoints_requests",
@@ -51,22 +56,6 @@ var OkStatus = Status{
 	Status: "ok",
 }
 
-func countEndpoint(request *http.Request, start time.Time) {
-	url := request.URL.String()
-	duration := time.Since(start)
-	log.Printf("Time to serve the page: %s\n", duration)
-
-	apiRequests.With(prometheus.Labels{"url": url}).Inc()
-
-	apiResponses.With(prometheus.Labels{"url": url}).Observe(float64(duration.Microseconds()))
-}
-
-func mainEndpoint(writer http.ResponseWriter, request *http.Request) {
-	start := time.Now()
-	io.WriteString(writer, "Hello world!\n")
-	countEndpoint(request, start)
-}
-
 func logRequestHandler(writer http.ResponseWriter, request *http.Request, nextHandler http.Handler) {
 	log.Println("Request URI: " + request.RequestURI)
 	log.Println("Request method: " + request.Method)
@@ -80,23 +69,20 @@ func logRequest(nextHandler http.Handler) http.Handler {
 		})
 }
 
-// Initialize server
-func Initialize(address, ldap string) {
-	log.Println("Initializing HTTP server at", ldap)
+// Initialize main function that start server
+func (s Server) Initialize() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.Use(logRequest)
-	router.Use(JwtAuthentication)
+	router.Use(s.JWTAuthentication)
 
-	router.HandleFunc(APIPrefix, mainEndpoint).Methods("GET")
-	router.HandleFunc(APIPrefix+"login", func(w http.ResponseWriter, r *http.Request) { login(w, r, ldap) }).Methods("POST")
+	router.PathPrefix(APIPrefix).Handler(http.HandlerFunc(s.HandleHTTP))
+	router.HandleFunc(APIPrefix+"login", s.Login).Methods("POST")
 
-	clientRouter := router.PathPrefix(APIPrefix + "client").Subrouter()
-	clientRouter.HandleFunc("/cluster", func(w http.ResponseWriter, r *http.Request) { getClusters(w, r) }).Methods("GET")
-	log.Println("Starting HTTP server at", ldap)
+	log.Println("Starting HTTP server at", s.Address)
 
 	var err error
 
-	err = http.ListenAndServe(address, router)
+	err = http.ListenAndServe(s.Address, router)
 	if err != nil {
 		log.Fatal("Unable to initialize HTTP server", err)
 		os.Exit(2)

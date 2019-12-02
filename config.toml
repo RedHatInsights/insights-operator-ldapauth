@@ -1,3 +1,4 @@
 [service]
 ldap="ldap.corp.redhat.com"
-address=":8080"
+address=":8081"
+proxy="http://localhost:8080"
