@@ -24,11 +24,11 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 	"time"
 )
 
-const API_PREFIX = "/api/v1/"
+// APIPrefix is appended before all REST API endpoint addresses
+const APIPrefix = "/api/v1/"
 
 var apiRequests = promauto.NewCounterVec(prometheus.CounterOpts{
 	Name: "api_endpoints_requests",
@@ -41,10 +41,12 @@ var apiResponses = promauto.NewHistogramVec(prometheus.HistogramOpts{
 	Buckets: prometheus.LinearBuckets(0, 20, 20),
 }, []string{"url"})
 
+// Status structure for RestAPI response
 type Status struct {
 	Status string `json:"status"`
 }
 
+// OkStatus prepared successful response
 var OkStatus = Status{
 	Status: "ok",
 }
@@ -57,11 +59,6 @@ func countEndpoint(request *http.Request, start time.Time) {
 	apiRequests.With(prometheus.Labels{"url": url}).Inc()
 
 	apiResponses.With(prometheus.Labels{"url": url}).Observe(float64(duration.Microseconds()))
-}
-
-func retrieveIdRequestParameter(request *http.Request) (int64, error) {
-	id_var := mux.Vars(request)["id"]
-	return strconv.ParseInt(id_var, 10, 0)
 }
 
 func mainEndpoint(writer http.ResponseWriter, request *http.Request) {
@@ -83,16 +80,17 @@ func logRequest(nextHandler http.Handler) http.Handler {
 		})
 }
 
+// Initialize server
 func Initialize(address, ldap string) {
 	log.Println("Initializing HTTP server at", ldap)
 	router := mux.NewRouter().StrictSlash(true)
 	router.Use(logRequest)
 	router.Use(JwtAuthentication)
 
-	router.HandleFunc(API_PREFIX, mainEndpoint).Methods("GET")
-	router.HandleFunc(API_PREFIX+"login", func(w http.ResponseWriter, r *http.Request) { login(w, r, ldap) }).Methods("POST")
+	router.HandleFunc(APIPrefix, mainEndpoint).Methods("GET")
+	router.HandleFunc(APIPrefix+"login", func(w http.ResponseWriter, r *http.Request) { login(w, r, ldap) }).Methods("POST")
 
-	clientRouter := router.PathPrefix(API_PREFIX + "client").Subrouter()
+	clientRouter := router.PathPrefix(APIPrefix + "client").Subrouter()
 	clientRouter.HandleFunc("/cluster", func(w http.ResponseWriter, r *http.Request) { getClusters(w, r) }).Methods("GET")
 	log.Println("Starting HTTP server at", ldap)
 

@@ -3,13 +3,18 @@ package server
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	jwt "github.com/dgrijalva/jwt-go"
 	auth "github.com/redhatinsights/insights-operator-ldapauth/auth"
 	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
 	"net/http"
 	"os"
 	"strings"
+)
+
+type contextKey string
+
+const (
+	contextKeyUser = contextKey("user")
 )
 
 func login(writer http.ResponseWriter, request *http.Request, ldap string) {
@@ -25,12 +30,15 @@ func login(writer http.ResponseWriter, request *http.Request, ldap string) {
 	u.SendResponse(writer, resp)
 }
 
+/*
+JwtAuthentication - middleware for authenticate user by Token
+*/
 var JwtAuthentication = func(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		notAuth := []string{API_PREFIX + "login"} //List of endpoints that doesn't require auth
-		requestPath := r.URL.Path                 //current request path
+		notAuth := []string{APIPrefix + "login"} //List of endpoints that doesn't require auth
+		requestPath := r.URL.Path                //current request path
 
 		//check if request does not need authentication, serve the request if it doesn't need it
 		for _, value := range notAuth {
@@ -77,8 +85,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 		}
 
 		//Everything went well, proceed with the request and set the caller to the user retrieved from the parsed token
-		fmt.Sprintf("User %", tk.Login) //Useful for monitoring
-		ctx := context.WithValue(r.Context(), "user", tk.Login)
+		ctx := context.WithValue(r.Context(), contextKeyUser, tk.Login)
 		r = r.WithContext(ctx)
 		next.ServeHTTP(w, r) //proceed in the middleware chain!
 	})
