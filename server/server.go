@@ -69,14 +69,23 @@ func logRequest(nextHandler http.Handler) http.Handler {
 		})
 }
 
+func (s Server) addDefaultHeaders(nextHandler http.Handler) http.Handler {
+	return http.HandlerFunc(
+		func(writer http.ResponseWriter, request *http.Request) {
+			writer.Header().Set("Content-Type", "application/json; charset=utf-8")
+			nextHandler.ServeHTTP(writer, request)
+		})
+}
+
 // Initialize main function that start server
 func (s Server) Initialize() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.Use(logRequest)
 	router.Use(s.JWTAuthentication)
+	router.Use(s.addDefaultHeaders)
 
-	router.PathPrefix(APIPrefix).Handler(http.HandlerFunc(s.HandleHTTP))
 	router.HandleFunc(APIPrefix+"login", s.Login).Methods("POST")
+	router.PathPrefix(APIPrefix).Handler(http.HandlerFunc(s.HandleHTTP))
 
 	log.Println("Starting HTTP server at", s.Address)
 
