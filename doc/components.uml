@@ -1,0 +1,32 @@
+// Copyright Pavel Tisnovsky 2019
+
+@startuml
+
+[Insights operator controller service] as service #99ff99
+
+cloud {
+    [CLI client] as cli
+    interface "HTTP" as cli_to_ldap_auth
+    cli - cli_to_ldap_auth
+
+    [LDAP auth service] as ldap_auth #ccccff
+    interface "TLS" as ldap_auth_tls
+    cli_to_ldap_auth - ldap_auth
+    ldap_auth -- ldap_auth_tls
+
+    [Red Hat LDAP] as rh_ldap
+    ldap_auth_tls -- rh_ldap
+
+    interface "HTTPS" as ldap_auth_to_service_1
+}
+
+interface "HTTPS" as ldap_auth_to_service_2
+
+ldap_auth - ldap_auth_to_service_1
+ldap_auth_to_service_1 -- ldap_auth_to_service_2
+ldap_auth_to_service_2 - service
+
+note left of ldap_auth_to_service_1 : Inside Red Hat network
+note left of ldap_auth_to_service_2 : In the wild
+
+@enduml
