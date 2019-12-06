@@ -2,6 +2,24 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/RedHatInsights/insights-operator-ldapauth)](https://goreportcard.com/report/github.com/RedHatInsights/insights-operator-ldapauth)[![Build Status](https://travis-ci.org/RedHatInsights/insights-operator-ldapauth.svg?branch=master)](https://travis-ci.org/RedHatInsights/insights-operator-ldapauth)
 
+## Overview
+
+The whole system consists of several components: CLI client, LDAP Auth service, and the Insights operator instrumentation service:
+
+[component]: doc/components.png "Components"
+
+### Authorization part
+
+[diagram2]: doc/auth_sequence_002.png.uml.png "Diagram"
+
+### Authorization sequence diagram for known user with proper token
+
+[diagram7]: doc/auth_sequence_007.png.uml.png "Diagram"
+
+### Authorization sequence diagram in case of any error
+
+[diagram8]: doc/auth_sequence_008.png.uml.png "Diagram"
+
 ## Starting
 
 By default application starting on port `8081`, but it can be changed in configuration file `config.toml`.
