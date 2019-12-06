@@ -77,6 +77,7 @@ ldap_auth -> service: REST API request
 
 newpage
 autonumber 1
+== Initialization ==
 cli -> ldap_auth: Login (user+password)
 ldap_auth -> rh_ldap: User+password
 rh_ldap -[#green]> ldap_auth: Success+token
@@ -88,6 +89,7 @@ service -> ldap_auth: REST API response
 
 newpage
 autonumber 1
+== Initialization ==
 cli -> ldap_auth: Login (user+password)
 ldap_auth -> rh_ldap: User+password
 rh_ldap -[#green]> ldap_auth: Success+token
