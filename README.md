@@ -6,19 +6,19 @@
 
 The whole system consists of several components: CLI client, LDAP Auth service, and the Insights operator instrumentation service:
 
-[component]: doc/components.png "Components"
+![Components](doc/components.png)
 
 ### Authorization part
 
-[diagram2]: doc/auth_sequence_002.png.uml.png "Diagram"
+![Diagram2](doc/auth_sequence_002.png)
 
 ### Authorization sequence diagram for known user with proper token
 
-[diagram7]: doc/auth_sequence_007.png.uml.png "Diagram"
+![Diagram7](doc/auth_sequence_007.png)
 
 ### Authorization sequence diagram in case of any error
 
-[diagram8]: doc/auth_sequence_008.png.uml.png "Diagram"
+![Diagram8](doc/auth_sequence_008.png)
 
 ## Starting
 
