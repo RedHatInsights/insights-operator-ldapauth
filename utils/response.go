@@ -26,3 +26,9 @@ func SendForbidden(w http.ResponseWriter, data map[string]interface{}) {
 	w.WriteHeader(http.StatusForbidden)
 	SendResponse(w, data)
 }
+
+// SendUnauthorized - return error response
+func SendUnauthorized(w http.ResponseWriter, data map[string]interface{}) {
+	w.WriteHeader(http.StatusUnauthorized)
+	SendResponse(w, data)
+}

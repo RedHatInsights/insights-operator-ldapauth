@@ -4,12 +4,13 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
-	"github.com/dgrijalva/jwt-go"
-	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
-	"gopkg.in/ldap.v3"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/dgrijalva/jwt-go"
+	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
+	"gopkg.in/ldap.v3"
 )
 
 // Token JWT claims struct
@@ -82,7 +83,7 @@ func ldapAuth(login, password, ldapHost string) (bool, error) {
 }
 
 // Authenticate - validate user credentials and create auth token
-func Authenticate(login, password, ldap string) map[string]interface{} {
+func Authenticate(login, password, ldap string) (map[string]interface{}, error) {
 	var err error
 	account := &Account{}
 	account.Login = login
@@ -92,7 +93,8 @@ func Authenticate(login, password, ldap string) map[string]interface{} {
 	// attempt the authentication
 	if err != nil || !ok {
 		log.Println(err)
-		return u.BuildResponse("Invalid login credentials. Please try again")
+		r := u.BuildResponse(err.Error())
+		return r, err
 	}
 
 	//Create JWT token
@@ -103,5 +105,5 @@ func Authenticate(login, password, ldap string) map[string]interface{} {
 
 	resp := u.BuildResponse("ok")
 	resp["account"] = account
-	return resp
+	return resp, nil
 }

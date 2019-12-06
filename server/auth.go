@@ -26,8 +26,11 @@ func (s Server) Login(writer http.ResponseWriter, request *http.Request) {
 		u.SendError(writer, status)
 		return
 	}
-
-	resp := auth.Authenticate(account.Login, account.Password, s.LDAP)
+	resp, err := auth.Authenticate(account.Login, account.Password, s.LDAP)
+	if err != nil {
+		u.SendUnauthorized(writer, resp)
+		return
+	}
 	u.SendResponse(writer, resp)
 }
 
