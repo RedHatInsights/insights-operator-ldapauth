@@ -23,6 +23,11 @@ import (
 	"net/http"
 )
 
+const (
+	contentType = "Content-Type"
+	appJSON     = "application/json; charset=utf-8"
+)
+
 // BuildResponse builds response for RestAPI request
 func BuildResponse(status string) map[string]interface{} {
 	return map[string]interface{}{"status": status}
@@ -35,18 +40,21 @@ func SendResponse(w http.ResponseWriter, data map[string]interface{}) {
 
 // SendError returns error response
 func SendError(w http.ResponseWriter, data map[string]interface{}) {
+	w.Header().Set(contentType, appJSON)
 	w.WriteHeader(http.StatusBadRequest)
 	SendResponse(w, data)
 }
 
 // SendForbidden returns response with HTTP status Forbidden
 func SendForbidden(w http.ResponseWriter, data map[string]interface{}) {
+	w.Header().Set(contentType, appJSON)
 	w.WriteHeader(http.StatusForbidden)
 	SendResponse(w, data)
 }
 
 // SendUnauthorized returns error response for unauthorized access
 func SendUnauthorized(w http.ResponseWriter, data map[string]interface{}) {
+	w.Header().Set(contentType, appJSON)
 	w.WriteHeader(http.StatusUnauthorized)
 	SendResponse(w, data)
 }
