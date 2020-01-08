@@ -4,19 +4,15 @@ go:
 
 jobs:
   include:
-    - stage: style
-      script:
-        - ./.travis.gofmt.sh
-        - ./.travis.govet.sh
-        - ./.travis.golint.sh
-        - ./.travis.gocyclo.sh
     - stage: unit tests
-      before_script: go build
       script:
-        - go test -coverprofile coverage.out $(go list ./... | grep -v tests)
+        - make test
         - go tool cover -func=coverage.out
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+    - stage: style
+      script:
+        - make style
 
 stages:
   - style
