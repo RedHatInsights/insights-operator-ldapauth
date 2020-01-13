@@ -29,6 +29,9 @@ import (
 	"gopkg.in/ldap.v3"
 )
 
+//NoAccessMessage - Error message for user with no access
+const NoAccessMessage = "User has no rights to access"
+
 // Token JWT claims struct
 type Token struct {
 	Login string
@@ -42,19 +45,24 @@ type Account struct {
 	Token    string `json:"token"`
 }
 
-func ldapAuth(login, password, ldapHost string) (bool, error) {
+func createLdapConnection(ldapHost string) (*ldap.Conn, error) {
 	var err error
-	l, err := ldap.Dial("tcp", fmt.Sprintf("%s:%d", ldapHost, 389))
+	conn, err := ldap.Dial("tcp", fmt.Sprintf("%s:%d", ldapHost, 389))
 	if err != nil {
-		return false, err
+		return nil, err
 	}
-	defer l.Close()
+	return conn, nil
+}
+
+func ldapAuth(login string, password string, client ldap.Client) (bool, error) {
+	var err error
 
 	// Reconnect with TLS
-	err = l.StartTLS(&tls.Config{InsecureSkipVerify: true})
+	err = client.StartTLS(&tls.Config{InsecureSkipVerify: true})
 	if err != nil {
 		return false, err
 	}
+	defer client.Close()
 
 	// // Search for the given username
 	searchRequest := ldap.NewSearchRequest(
@@ -65,7 +73,7 @@ func ldapAuth(login, password, ldapHost string) (bool, error) {
 		nil,
 	)
 
-	sr, err := l.Search(searchRequest)
+	sr, err := client.Search(searchRequest)
 	if err != nil {
 		return false, err
 	}
@@ -85,13 +93,13 @@ func ldapAuth(login, password, ldapHost string) (bool, error) {
 	}
 
 	if !isInGroup {
-		return false, errors.New("User has no rights to access")
+		return false, errors.New(NoAccessMessage)
 	}
 
 	// userdn := sr.Entries[0].DN
 
 	// Bind as the user to verify their password
-	err = l.Bind("uid="+login+",ou=users,dc=redhat,dc=com", password)
+	err = client.Bind(sr.Entries[0].DN, password)
 	if err != nil {
 		return false, err
 	}
@@ -104,7 +112,13 @@ func Authenticate(login, password, ldap string) (map[string]interface{}, error) 
 	account := &Account{}
 	account.Login = login
 
-	ok, err := ldapAuth(login, password, ldap)
+	conn, err := createLdapConnection(ldap)
+	if err != nil {
+		log.Println(err)
+		r := u.BuildResponse(err.Error())
+		return r, err
+	}
+	ok, err := ldapAuth(login, password, conn)
 
 	// attempt the authentication
 	if err != nil || !ok {
