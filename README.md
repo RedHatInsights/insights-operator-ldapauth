@@ -29,6 +29,12 @@ go build # Build application
 ./insights-operator-ldapauth # Start application
 ```
 
+Alternatively you can use *GNU make* to perform the same operation:
+
+```
+make run
+```
+
 ## Authentication
 
 For authentication is used POST request to `/api/v1/login` with credentials:
@@ -45,6 +51,13 @@ For now it connecting directly to RedHat LDAP, so for running this application c
 
 Application has only one route is `/api/v1/login`, requests to other routes will be proxied to `insights-operator-controller`.
 
+## Code style and cyclomatic complexity checks
+
+All code style checks, cyclomatic complexity measurement etc. can be started from command line by using:
+
+```
+make style
+```
 
 ## CI
 
