@@ -79,6 +79,7 @@ proxy="http://localhost:8080"
 Some settings can be setted with environment variables:
 
  - `CONTROLLER_PREFIX` - specify URL path prefix (Default: `/api/v1/`)
+ - `INSIGHTS_CONTROLLER_CONFIG_FILE` - custom path to config file (default: `./config.toml`)
 
 ## CI
 

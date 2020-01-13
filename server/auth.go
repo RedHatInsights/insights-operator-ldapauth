@@ -21,7 +21,7 @@ import (
 	"encoding/json"
 	jwt "github.com/dgrijalva/jwt-go"
 	auth "github.com/redhatinsights/insights-operator-ldapauth/auth"
-	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
+	"github.com/redhatinsights/insights-operator-utils/responses"
 	"net/http"
 	"os"
 	"strings"
@@ -38,16 +38,15 @@ func (s Server) Login(writer http.ResponseWriter, request *http.Request) {
 	account := &auth.Account{}
 	err := json.NewDecoder(request.Body).Decode(account) //decode the request body into struct and failed if any error occur
 	if err != nil {
-		status := u.BuildResponse("Invalid request")
-		u.SendError(writer, status)
+		responses.SendError(writer, "Invalid request")
 		return
 	}
 	resp, err := auth.Authenticate(account.Login, account.Password, s.LDAP)
 	if err != nil {
-		u.SendUnauthorized(writer, resp)
+		responses.SendUnauthorized(writer, resp)
 		return
 	}
-	u.SendResponse(writer, resp)
+	responses.SendResponse(writer, resp)
 }
 
 // JWTAuthentication - middleware for authenticate user by Token
@@ -67,19 +66,16 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 			}
 		}
 
-		response := make(map[string]interface{})
 		tokenHeader := r.Header.Get("Authorization") //Grab the token from the header
 
 		if tokenHeader == "" { //Token is missing, returns with error code 403 Unauthorized
-			response = u.BuildResponse("Missing auth token")
-			u.SendForbidden(w, response)
+			responses.SendForbidden(w, "Missing auth token")
 			return
 		}
 
 		splitted := strings.Split(tokenHeader, " ") //The token normally comes in format `Bearer {token-body}`, we check if the retrieved token matched this requirement
 		if len(splitted) != 2 {
-			response = u.BuildResponse("Invalid/Malformed auth token")
-			u.SendForbidden(w, response)
+			responses.SendForbidden(w, "Invalid/Malformed auth token")
 			return
 		}
 
@@ -91,14 +87,12 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 		})
 
 		if err != nil { //Malformed token, returns with http code 403 as usual
-			response = u.BuildResponse("Malformed authentication token")
-			u.SendForbidden(w, response)
+			responses.SendForbidden(w, "Malformed authentication token")
 			return
 		}
 
 		if !token.Valid { //Token is invalid, maybe not signed on this server
-			response = u.BuildResponse("Token is not valid.")
-			u.SendForbidden(w, response)
+			responses.SendForbidden(w, "Token is not valid.")
 			return
 		}
 
