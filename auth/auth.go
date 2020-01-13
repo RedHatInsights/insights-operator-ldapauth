@@ -25,7 +25,7 @@ import (
 	"strings"
 
 	"github.com/dgrijalva/jwt-go"
-	u "github.com/redhatinsights/insights-operator-ldapauth/utils"
+	"github.com/redhatinsights/insights-operator-utils/responses"
 	"gopkg.in/ldap.v3"
 )
 
@@ -115,7 +115,7 @@ func Authenticate(login, password, ldap string) (map[string]interface{}, error) 
 	conn, err := createLdapConnection(ldap)
 	if err != nil {
 		log.Println(err)
-		r := u.BuildResponse(err.Error())
+		r := responses.BuildResponse(err.Error())
 		return r, err
 	}
 	ok, err := ldapAuth(login, password, conn)
@@ -123,7 +123,7 @@ func Authenticate(login, password, ldap string) (map[string]interface{}, error) 
 	// attempt the authentication
 	if err != nil || !ok {
 		log.Println(err)
-		r := u.BuildResponse(err.Error())
+		r := responses.BuildResponse(err.Error())
 		return r, err
 	}
 
@@ -133,7 +133,7 @@ func Authenticate(login, password, ldap string) (map[string]interface{}, error) 
 	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
 	account.Token = tokenString //Store the token in the response
 
-	resp := u.BuildResponse("ok")
+	resp := responses.BuildResponse("ok")
 	resp["account"] = account
 	return resp, nil
 }

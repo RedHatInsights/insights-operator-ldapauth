@@ -19,13 +19,21 @@ import (
 	"flag"
 	"fmt"
 	"github.com/redhatinsights/insights-operator-ldapauth/server"
+	"github.com/redhatinsights/insights-operator-utils/env"
 	"github.com/spf13/viper"
+	"path/filepath"
+	"strings"
 )
 
 func main() {
 	// parse the configuration
-	viper.SetConfigName("config")
-	viper.AddConfigPath(".")
+	configFile := env.GetEnv("INSIGHTS_CONTROLLER_CONFIG_FILE", "./config")
+	// we need to separate the directory name and filename without extension
+	directory, basename := filepath.Split(configFile)
+	file := strings.TrimSuffix(basename, filepath.Ext(basename))
+	// parse the configuration
+	viper.SetConfigName(file)
+	viper.AddConfigPath(directory)
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("Fatal error config file: %s", err))

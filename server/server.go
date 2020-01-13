@@ -20,14 +20,14 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/redhatinsights/insights-operator-ldapauth/utils"
+	"github.com/redhatinsights/insights-operator-utils/env"
 	"log"
 	"net/http"
 	"os"
 )
 
 // APIPrefix is appended before all REST API endpoint addresses
-var APIPrefix = utils.GetEnv("CONTROLLER_PREFIX", "/api/v1/")
+var APIPrefix = env.GetEnv("CONTROLLER_PREFIX", "/api/v1/")
 
 // Server basic configuration of server
 type Server struct {
