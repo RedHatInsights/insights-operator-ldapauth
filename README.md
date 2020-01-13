@@ -59,6 +59,27 @@ All code style checks, cyclomatic complexity measurement etc. can be started fro
 make style
 ```
 
+## Configuration
+
+Change the following lines in `config.toml`:
+
+```
+[service]
+ldap="ldap.corp.redhat.com"
+address=":8081"
+proxy="http://localhost:8080"
+```
+
+ - `ldap` is hostname of LDAP server
+ - `address` is address of ldapauth server
+ - `proxy` is address of controller server
+
+### Environment variables
+
+Some settings can be setted with environment variables:
+
+ - `CONTROLLER_PREFIX` - specify URL path prefix (Default: `/api/v1/`)
+
 ## CI
 
 [Travis CI](https://travis-ci.com/) is configured for this repository. Several tests and checks are started for all pull requests:
