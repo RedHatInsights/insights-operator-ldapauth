@@ -31,9 +31,10 @@ var APIPrefix = env.GetEnv("CONTROLLER_PREFIX", "/api/v1/")
 
 // Server basic configuration of server
 type Server struct {
-	Address string
-	LDAP    string
-	Proxy   string
+	Address     string
+	LDAP        string
+	Proxy       string
+	ProxyPrefix string
 }
 
 var apiRequests = promauto.NewCounterVec(prometheus.CounterOpts{
@@ -80,6 +81,7 @@ func (s Server) addDefaultHeaders(nextHandler http.Handler) http.Handler {
 
 // Initialize main function that start server
 func (s Server) Initialize() {
+	log.Println("API Prefix: ", APIPrefix)
 	router := mux.NewRouter().StrictSlash(true)
 	router.Use(logRequest)
 	router.Use(s.JWTAuthentication)
