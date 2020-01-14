@@ -21,6 +21,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 // HandleHTTP handle all routes, used for proxying them to controller
@@ -29,6 +30,7 @@ func (s Server) HandleHTTP(w http.ResponseWriter, req *http.Request) {
 	tempURL, _ := url.Parse(s.Proxy)
 	req.URL.Host = tempURL.Host
 	req.URL.Scheme = tempURL.Scheme
+	req.URL.Path = strings.Replace(req.URL.Path, APIPrefix, s.ProxyPrefix, 1)
 	req.Host = tempURL.Host
 	resp, err := http.DefaultTransport.RoundTrip(req)
 	if err != nil {

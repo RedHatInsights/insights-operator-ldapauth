@@ -68,11 +68,13 @@ Change the following lines in `config.toml`:
 ldap="ldap.corp.redhat.com"
 address=":8081"
 proxy="http://localhost:8080"
+proxy_prefix="/api/v1/"
 ```
 
  - `ldap` is hostname of LDAP server
  - `address` is address of ldapauth server
  - `proxy` is address of controller server
+ - `proxy_prefix` is prefix of controller server which will be replaced instead of ldapauth prefix
 
 ### Environment variables
 
