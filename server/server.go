@@ -35,6 +35,7 @@ type Server struct {
 	LDAP        string
 	Proxy       string
 	ProxyPrefix string
+	Transport   http.RoundTripper
 }
 
 var apiRequests = promauto.NewCounterVec(prometheus.CounterOpts{

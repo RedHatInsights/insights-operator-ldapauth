@@ -69,12 +69,18 @@ ldap="ldap.corp.redhat.com"
 address=":8081"
 proxy="http://localhost:8080"
 proxy_prefix="/api/v1/"
+proxy_tls=true
+tls_cert="certs/cert.pem"
+tls_key="certs/key.pem"
 ```
 
  - `ldap` is hostname of LDAP server
  - `address` is address of ldapauth server
  - `proxy` is address of controller server
  - `proxy_prefix` is prefix of controller server which will be replaced instead of ldapauth prefix
+ - `proxy_tls` is boolean flag that defines if proxy connection with controller should secured by mutual TLS
+ - `tls_cert` is path to certificate, can be used only if `proxy_tls == true`
+ - `tls_key` is path to key of certificate, can be used only if `proxy_tls == true`
 
 ### Environment variables
 
