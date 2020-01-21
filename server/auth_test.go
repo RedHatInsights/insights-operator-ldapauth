@@ -25,9 +25,10 @@ import (
 )
 
 var testServer = &Server{
-	Address: ":8081",
-	LDAP:    "",
-	Proxy:   "http://localhost:8080",
+	Address:   ":8081",
+	LDAP:      "",
+	Proxy:     "http://localhost:8080",
+	Transport: http.DefaultTransport,
 }
 
 func TestServerLoginUnauthorized(t *testing.T) {

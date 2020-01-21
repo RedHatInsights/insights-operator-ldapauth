@@ -16,14 +16,40 @@ limitations under the License.
 package main
 
 import (
+	"crypto/tls"
+	"crypto/x509"
 	"flag"
 	"fmt"
 	"github.com/redhatinsights/insights-operator-ldapauth/server"
 	"github.com/redhatinsights/insights-operator-utils/env"
 	"github.com/spf13/viper"
+	"io/ioutil"
+	"log"
+	"net/http"
 	"path/filepath"
 	"strings"
 )
+
+func createTLS(tlsCert, tlsKey string) http.RoundTripper {
+	caCert, err := ioutil.ReadFile(tlsCert)
+	if err != nil {
+		log.Fatal(err)
+	}
+	cert, err := tls.LoadX509KeyPair(tlsCert, tlsKey)
+	if err != nil {
+		log.Fatal(err)
+	}
+	caCertPool := x509.NewCertPool()
+	caCertPool.AppendCertsFromPEM(caCert)
+	// Create a HTTPS client and supply the created CA pool
+	transport := &http.Transport{
+		TLSClientConfig: &tls.Config{
+			RootCAs:      caCertPool,
+			Certificates: []tls.Certificate{cert},
+		},
+	}
+	return transport
+}
 
 func main() {
 	// parse the configuration
@@ -47,6 +73,12 @@ func main() {
 		Address:     serviceCfg.GetString("address"),
 		Proxy:       serviceCfg.GetString("proxy"),
 		ProxyPrefix: serviceCfg.GetString("proxy_prefix"),
+	}
+
+	if serviceCfg.GetBool("proxy_tls") {
+		s.Transport = createTLS(serviceCfg.GetString("tls_cert"), serviceCfg.GetString("tls_key"))
+	} else {
+		s.Transport = http.DefaultTransport
 	}
 
 	s.Initialize()

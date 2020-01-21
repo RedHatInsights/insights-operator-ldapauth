@@ -32,7 +32,7 @@ func (s Server) HandleHTTP(w http.ResponseWriter, req *http.Request) {
 	req.URL.Scheme = tempURL.Scheme
 	req.URL.Path = strings.Replace(req.URL.Path, APIPrefix, s.ProxyPrefix, 1)
 	req.Host = tempURL.Host
-	resp, err := http.DefaultTransport.RoundTrip(req)
+	resp, err := s.Transport.RoundTrip(req)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusServiceUnavailable)
 		return
