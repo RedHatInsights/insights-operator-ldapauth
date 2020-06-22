@@ -1,6 +1,7 @@
 .PHONY: help clean build fmt lint vet run test style cyclo
 
 SOURCES:=$(shell find . -name '*.go')
+DOCFILES:=$(addprefix docs/packages/, $(addsuffix .html, $(basename ${SOURCES})))
 
 default: build
 
@@ -27,6 +28,12 @@ cyclo: ## Run gocyclo
 	./gocyclo.sh
 
 style: fmt vet lint cyclo ## Run all the formatting related commands (fmt, vet, lint, cyclo)
+
+docs/packages/%.html: %.go
+	mkdir -p $(dir $@)
+	docgo -outdir $(dir $@) $^
+
+godoc: ${DOCFILES}
 
 run: clean build ## Build the project and executes the binary
 	./insights-operator-ldapauth 
