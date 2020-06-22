@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>auth.go</title>
+<meta charset="utf-8"/>
+<style type="text/css">body {
+    background: rgb(225, 225, 225);
+    margin: 0px;
+    padding: 0px;
+}
+
+#docgo p {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+}
+
+#docgo div {
+    display: inline;
+}
+
+#docgo #background {
+    position: fixed;
+    top: 0; left: 525px; right: 0; bottom: 0;
+    background: rgb(47, 47, 47);
+    border-left: 1px solid #e5e5ee;
+    z-index: -1;
+}
+
+#docgo .keyword {
+    color: rgb(250, 200, 100);
+}
+
+#docgo .literal {
+    color: rgb(140, 190, 100);
+}
+
+#docgo .ident {
+    color: white;
+}
+
+#docgo .operator {
+    color: white;
+}
+
+#docgo .comment {
+}
+
+#docgo h1, h2, h3, h4, h5 {
+    text-align: left;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+}
+
+#docgo h1 {
+    margin-top: 40px;
+}
+
+#docgo .doc {
+    vertical-align: top;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+    font-size: 15px;
+    line-height: 22px;
+    color: black;
+    min-width: 450px;
+    max-width: 450px;
+    padding-top: 10px;
+    padding-right: 25px;
+    padding-bottom: 1px;
+    padding-left: 50px;
+    overflow-x: hidden;
+}
+
+#docgo .code {
+    min-width: 650px;
+    max-width: 650px;
+    padding-left: 25px;
+    padding-right: 15px;
+    border-left: 1px;
+    overflow-x: hidden;
+    vertical-align: top;
+}
+
+#docgo .code pre code  {
+    font-size: 12px;
+    line-height: 18px;
+    font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
+    color: rgb(120, 120, 120);
+}
+</style>
+</head>
+<body>
+<div id="docgo">
+  <div id="background"></div>
+  <table>
+    <thead><tr><th class="doc"><h1>auth.go</h1></th><th class="code"></th></tr></thead>
+    <tbody>
+      
+      <tr class="section">
+	<td class="doc"></td>
+	<td class="code"><pre><code><div class="comment">/*
+Copyright © 2019, 2020 Red Hat, Inc.
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/</div>
+
+<div class="keyword">package</div> <div class="ident">auth</div><div class="operator"></div>
+
+<div class="keyword">import</div> <div class="operator">(</div>
+	<div class="literal">&#34;crypto/tls&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;errors&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;fmt&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;log&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;os&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;strings&#34;</div><div class="operator"></div>
+
+	<div class="literal">&#34;github.com/dgrijalva/jwt-go&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;github.com/redhatinsights/insights-operator-utils/responses&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;gopkg.in/ldap.v3&#34;</div><div class="operator"></div>
+<div class="operator">)</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>NoAccessMessage - Error message for user with no access</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">const</div> <div class="ident">NoAccessMessage</div> <div class="operator">=</div> <div class="literal">&#34;User has no rights to access&#34;</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>Token JWT claims struct</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">Token</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">Login</div> <div class="ident">string</div><div class="operator"></div>
+	<div class="ident">jwt</div><div class="operator">.</div><div class="ident">StandardClaims</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>Account a struct to rep user account</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">type</div> <div class="ident">Account</div> <div class="keyword">struct</div> <div class="operator">{</div>
+	<div class="ident">Login</div>    <div class="ident">string</div> <div class="literal">`json:&#34;login&#34;`</div><div class="operator"></div>
+	<div class="ident">Password</div> <div class="ident">string</div> <div class="literal">`json:&#34;password&#34;`</div><div class="operator"></div>
+	<div class="ident">Token</div>    <div class="ident">string</div> <div class="literal">`json:&#34;token&#34;`</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+<div class="keyword">func</div> <div class="ident">createLdapConnection</div><div class="operator">(</div><div class="ident">ldapHost</div> <div class="ident">string</div><div class="operator">)</div> <div class="operator">(</div><div class="operator">*</div><div class="ident">ldap</div><div class="operator">.</div><div class="ident">Conn</div><div class="operator">,</div> <div class="ident">error</div><div class="operator">)</div> <div class="operator">{</div>
+	<div class="keyword">var</div> <div class="ident">err</div> <div class="ident">error</div><div class="operator"></div>
+	<div class="ident">conn</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">ldap</div><div class="operator">.</div><div class="ident">Dial</div><div class="operator">(</div><div class="literal">&#34;tcp&#34;</div><div class="operator">,</div> <div class="ident">fmt</div><div class="operator">.</div><div class="ident">Sprintf</div><div class="operator">(</div><div class="literal">&#34;%s:%d&#34;</div><div class="operator">,</div> <div class="ident">ldapHost</div><div class="operator">,</div> <div class="literal">389</div><div class="operator">)</div><div class="operator">)</div><div class="operator"></div>
+	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">{</div>
+		<div class="keyword">return</div> <div class="ident">nil</div><div class="operator">,</div> <div class="ident">err</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+	<div class="keyword">return</div> <div class="ident">conn</div><div class="operator">,</div> <div class="ident">nil</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+<div class="keyword">func</div> <div class="ident">ldapAuth</div><div class="operator">(</div><div class="ident">login</div> <div class="ident">string</div><div class="operator">,</div> <div class="ident">password</div> <div class="ident">string</div><div class="operator">,</div> <div class="ident">client</div> <div class="ident">ldap</div><div class="operator">.</div><div class="ident">Client</div><div class="operator">)</div> <div class="operator">(</div><div class="ident">bool</div><div class="operator">,</div> <div class="ident">error</div><div class="operator">)</div> <div class="operator">{</div>
+	<div class="keyword">var</div> <div class="ident">err</div> <div class="ident">error</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>Reconnect with TLS</p>
+</td>
+	<td class="code"><pre><code>	<div class="ident">err</div> <div class="operator">=</div> <div class="ident">client</div><div class="operator">.</div><div class="ident">StartTLS</div><div class="operator">(</div><div class="operator">&amp;</div><div class="ident">tls</div><div class="operator">.</div><div class="ident">Config</div><div class="operator">{</div><div class="ident">InsecureSkipVerify</div><div class="operator">:</div> <div class="ident">true</div><div class="operator">}</div><div class="operator">)</div><div class="operator"></div>
+	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">{</div>
+		<div class="keyword">return</div> <div class="ident">false</div><div class="operator">,</div> <div class="ident">err</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+	<div class="keyword">defer</div> <div class="ident">client</div><div class="operator">.</div><div class="ident">Close</div><div class="operator">(</div><div class="operator">)</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>// Search for the given username</p>
+</td>
+	<td class="code"><pre><code>	<div class="ident">searchRequest</div> <div class="operator">:=</div> <div class="ident">ldap</div><div class="operator">.</div><div class="ident">NewSearchRequest</div><div class="operator">(</div>
+		<div class="literal">&#34;dc=redhat,dc=com&#34;</div><div class="operator">,</div>
+		<div class="ident">ldap</div><div class="operator">.</div><div class="ident">ScopeWholeSubtree</div><div class="operator">,</div> <div class="ident">ldap</div><div class="operator">.</div><div class="ident">NeverDerefAliases</div><div class="operator">,</div> <div class="literal">0</div><div class="operator">,</div> <div class="literal">0</div><div class="operator">,</div> <div class="ident">false</div><div class="operator">,</div>
+		<div class="ident">fmt</div><div class="operator">.</div><div class="ident">Sprintf</div><div class="operator">(</div><div class="literal">&#34;(&amp;(uid=%s))&#34;</div><div class="operator">,</div> <div class="ident">login</div><div class="operator">)</div><div class="operator">,</div>
+		<div class="operator">[</div><div class="operator">]</div><div class="ident">string</div><div class="operator">{</div><div class="literal">&#34;dn&#34;</div><div class="operator">,</div> <div class="literal">&#34;memberOf&#34;</div><div class="operator">}</div><div class="operator">,</div>
+		<div class="ident">nil</div><div class="operator">,</div>
+	<div class="operator">)</div><div class="operator"></div>
+
+	<div class="ident">sr</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">client</div><div class="operator">.</div><div class="ident">Search</div><div class="operator">(</div><div class="ident">searchRequest</div><div class="operator">)</div><div class="operator"></div>
+	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">{</div>
+		<div class="keyword">return</div> <div class="ident">false</div><div class="operator">,</div> <div class="ident">err</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+
+	<div class="keyword">if</div> <div class="ident">len</div><div class="operator">(</div><div class="ident">sr</div><div class="operator">.</div><div class="ident">Entries</div><div class="operator">)</div> <div class="operator">!=</div> <div class="literal">1</div> <div class="operator">{</div>
+		<div class="keyword">return</div> <div class="ident">false</div><div class="operator">,</div> <div class="ident">errors</div><div class="operator">.</div><div class="ident">New</div><div class="operator">(</div><div class="literal">&#34;User does not exist or too many entries returned&#34;</div><div class="operator">)</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+
+	<div class="ident">isInGroup</div> <div class="operator">:=</div> <div class="ident">false</div><div class="operator"></div>
+
+	<div class="keyword">for</div> <div class="ident">i</div> <div class="operator">:=</div> <div class="literal">0</div><div class="operator">;</div> <div class="ident">i</div> <div class="operator">&lt;</div> <div class="ident">len</div><div class="operator">(</div><div class="ident">sr</div><div class="operator">.</div><div class="ident">Entries</div><div class="operator">[</div><div class="literal">0</div><div class="operator">]</div><div class="operator">.</div><div class="ident">Attributes</div><div class="operator">[</div><div class="literal">0</div><div class="operator">]</div><div class="operator">.</div><div class="ident">Values</div><div class="operator">)</div><div class="operator">;</div> <div class="ident">i</div><div class="operator">&#43;&#43;</div> <div class="operator">{</div>
+		<div class="ident">entries</div> <div class="operator">:=</div> <div class="ident">strings</div><div class="operator">.</div><div class="ident">Split</div><div class="operator">(</div><div class="ident">sr</div><div class="operator">.</div><div class="ident">Entries</div><div class="operator">[</div><div class="literal">0</div><div class="operator">]</div><div class="operator">.</div><div class="ident">Attributes</div><div class="operator">[</div><div class="literal">0</div><div class="operator">]</div><div class="operator">.</div><div class="ident">Values</div><div class="operator">[</div><div class="ident">i</div><div class="operator">]</div><div class="operator">,</div> <div class="literal">&#34;,&#34;</div><div class="operator">)</div><div class="operator"></div>
+		<div class="keyword">if</div> <div class="ident">entries</div><div class="operator">[</div><div class="literal">0</div><div class="operator">]</div> <div class="operator">==</div> <div class="literal">&#34;cn=ccx-dev&#34;</div> <div class="operator">{</div>
+			<div class="ident">isInGroup</div> <div class="operator">=</div> <div class="ident">true</div><div class="operator"></div>
+			<div class="keyword">break</div><div class="operator"></div>
+		<div class="operator">}</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+
+	<div class="keyword">if</div> <div class="operator">!</div><div class="ident">isInGroup</div> <div class="operator">{</div>
+		<div class="keyword">return</div> <div class="ident">false</div><div class="operator">,</div> <div class="ident">errors</div><div class="operator">.</div><div class="ident">New</div><div class="operator">(</div><div class="ident">NoAccessMessage</div><div class="operator">)</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>userdn := sr.Entries[0].DN</p>
+</td>
+	<td class="code"><pre><code>
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>Bind as the user to verify their password</p>
+</td>
+	<td class="code"><pre><code>	<div class="ident">err</div> <div class="operator">=</div> <div class="ident">client</div><div class="operator">.</div><div class="ident">Bind</div><div class="operator">(</div><div class="ident">sr</div><div class="operator">.</div><div class="ident">Entries</div><div class="operator">[</div><div class="literal">0</div><div class="operator">]</div><div class="operator">.</div><div class="ident">DN</div><div class="operator">,</div> <div class="ident">password</div><div class="operator">)</div><div class="operator"></div>
+	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">{</div>
+		<div class="keyword">return</div> <div class="ident">false</div><div class="operator">,</div> <div class="ident">err</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+	<div class="keyword">return</div> <div class="ident">true</div><div class="operator">,</div> <div class="ident">nil</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>Authenticate - validate user credentials and create auth token</p>
+</td>
+	<td class="code"><pre><code><div class="keyword">func</div> <div class="ident">Authenticate</div><div class="operator">(</div><div class="ident">login</div><div class="operator">,</div> <div class="ident">password</div><div class="operator">,</div> <div class="ident">ldap</div> <div class="ident">string</div><div class="operator">)</div> <div class="operator">(</div><div class="keyword">map</div><div class="operator">[</div><div class="ident">string</div><div class="operator">]</div><div class="keyword">interface</div><div class="operator">{</div><div class="operator">}</div><div class="operator">,</div> <div class="ident">error</div><div class="operator">)</div> <div class="operator">{</div>
+	<div class="keyword">var</div> <div class="ident">err</div> <div class="ident">error</div><div class="operator"></div>
+	<div class="ident">account</div> <div class="operator">:=</div> <div class="operator">&amp;</div><div class="ident">Account</div><div class="operator">{</div><div class="operator">}</div><div class="operator"></div>
+	<div class="ident">account</div><div class="operator">.</div><div class="ident">Login</div> <div class="operator">=</div> <div class="ident">login</div><div class="operator"></div>
+
+	<div class="ident">conn</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">createLdapConnection</div><div class="operator">(</div><div class="ident">ldap</div><div class="operator">)</div><div class="operator"></div>
+	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">{</div>
+		<div class="ident">log</div><div class="operator">.</div><div class="ident">Println</div><div class="operator">(</div><div class="ident">err</div><div class="operator">)</div><div class="operator"></div>
+		<div class="ident">r</div> <div class="operator">:=</div> <div class="ident">responses</div><div class="operator">.</div><div class="ident">BuildResponse</div><div class="operator">(</div><div class="ident">err</div><div class="operator">.</div><div class="ident">Error</div><div class="operator">(</div><div class="operator">)</div><div class="operator">)</div><div class="operator"></div>
+		<div class="keyword">return</div> <div class="ident">r</div><div class="operator">,</div> <div class="ident">err</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+	<div class="ident">ok</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">ldapAuth</div><div class="operator">(</div><div class="ident">login</div><div class="operator">,</div> <div class="ident">password</div><div class="operator">,</div> <div class="ident">conn</div><div class="operator">)</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>attempt the authentication</p>
+</td>
+	<td class="code"><pre><code>	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">||</div> <div class="operator">!</div><div class="ident">ok</div> <div class="operator">{</div>
+		<div class="ident">log</div><div class="operator">.</div><div class="ident">Println</div><div class="operator">(</div><div class="ident">err</div><div class="operator">)</div><div class="operator"></div>
+		<div class="ident">r</div> <div class="operator">:=</div> <div class="ident">responses</div><div class="operator">.</div><div class="ident">BuildResponse</div><div class="operator">(</div><div class="ident">err</div><div class="operator">.</div><div class="ident">Error</div><div class="operator">(</div><div class="operator">)</div><div class="operator">)</div><div class="operator"></div>
+		<div class="keyword">return</div> <div class="ident">r</div><div class="operator">,</div> <div class="ident">err</div><div class="operator"></div>
+	<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>Create JWT token</p>
+</td>
+	<td class="code"><pre><code>	<div class="ident">tk</div> <div class="operator">:=</div> <div class="operator">&amp;</div><div class="ident">Token</div><div class="operator">{</div><div class="ident">Login</div><div class="operator">:</div> <div class="ident">account</div><div class="operator">.</div><div class="ident">Login</div><div class="operator">}</div><div class="operator"></div>
+	<div class="ident">token</div> <div class="operator">:=</div> <div class="ident">jwt</div><div class="operator">.</div><div class="ident">NewWithClaims</div><div class="operator">(</div><div class="ident">jwt</div><div class="operator">.</div><div class="ident">GetSigningMethod</div><div class="operator">(</div><div class="literal">&#34;HS256&#34;</div><div class="operator">)</div><div class="operator">,</div> <div class="ident">tk</div><div class="operator">)</div><div class="operator"></div>
+	<div class="ident">tokenString</div><div class="operator">,</div> <div class="ident">_</div> <div class="operator">:=</div> <div class="ident">token</div><div class="operator">.</div><div class="ident">SignedString</div><div class="operator">(</div><div class="operator">[</div><div class="operator">]</div><div class="ident">byte</div><div class="operator">(</div><div class="ident">os</div><div class="operator">.</div><div class="ident">Getenv</div><div class="operator">(</div><div class="literal">&#34;token_password&#34;</div><div class="operator">)</div><div class="operator">)</div><div class="operator">)</div><div class="operator"></div>
+	<div class="ident">account</div><div class="operator">.</div><div class="ident">Token</div> <div class="operator">=</div> <div class="ident">tokenString</div> <div class="operator"></div><div class="comment">//Store the token in the response</div>
+
+	<div class="ident">resp</div> <div class="operator">:=</div> <div class="ident">responses</div><div class="operator">.</div><div class="ident">BuildResponse</div><div class="operator">(</div><div class="literal">&#34;ok&#34;</div><div class="operator">)</div><div class="operator"></div>
+	<div class="ident">resp</div><div class="operator">[</div><div class="literal">&#34;account&#34;</div><div class="operator">]</div> <div class="operator">=</div> <div class="ident">account</div><div class="operator"></div>
+	<div class="keyword">return</div> <div class="ident">resp</div><div class="operator">,</div> <div class="ident">nil</div><div class="operator"></div>
+<div class="operator">}</div><div class="operator"></div>
+
+</code></pre></td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
