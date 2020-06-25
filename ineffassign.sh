@@ -13,11 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-if ! [ -x "$(command -v gocyclo)" ]
+if ! [ -x "$(command -v ineffassign)" ]
 then
-    echo -e "${BLUE}Installing gocyclo${NC}"
-    GO111MODULE=off go get github.com/fzipp/gocyclo
+    echo -e "${BLUE}Installing ineffassign${NC}"
+    GO111MODULE=off go get github.com/gordonklaus/ineffassign
 fi
 
-gocyclo -over 9 -avg .
+ineffassign .

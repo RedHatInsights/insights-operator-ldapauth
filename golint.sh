@@ -2,7 +2,11 @@
 
 cd "$(dirname $0)"
 
-go get golang.org/x/lint/golint
+if ! [ -x "$(command -v golint)" ]
+then
+    echo -e "${BLUE}Installing golint${NC}"
+    GO111MODULE=off go get golang.org/x/lint/golint 2> /dev/null
+fi
 
 if golint `go list ./...` |
     grep -v ALL_CAPS |

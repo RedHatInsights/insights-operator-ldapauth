@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Copyright 2020 Red Hat, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +14,10 @@
 # limitations under the License.
 
 
-if ! [ -x "$(command -v gocyclo)" ]
+if ! [ -x "$(command -v errcheck)" ]
 then
-    echo -e "${BLUE}Installing gocyclo${NC}"
-    GO111MODULE=off go get github.com/fzipp/gocyclo
+    echo -e "${BLUE}Installing errcheck ${NC}"
+    GO111MODULE=off go get github.com/kisielk/errcheck
 fi
 
-gocyclo -over 9 -avg .
+errcheck ./...
