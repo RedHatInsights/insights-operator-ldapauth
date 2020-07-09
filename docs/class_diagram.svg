@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="360px" preserveAspectRatio="none" style="width:975px;height:360px;" version="1.1" viewBox="0 0 975 360" width="975px" zoomAndPan="magnify">
+  <defs>
+    <filter height="300%" id="fbu15of9q5kgc" width="300%" x="-1" y="-1">
+      <feGaussianBlur result="blurOut" stdDeviation="2.0"/>
+      <feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+      <feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/>
+      <feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/>
+    </filter>
+  </defs>
+  <g>
+    <!--MD5=[0c4a738b3201a23a254af68352446157]
+cluster auth-->
+    <polygon fill="#FFFFFF" filter="url(#fbu15of9q5kgc)" points="32,175.5,74,175.5,81,197.7969,291,197.7969,291,296.5,32,296.5,32,175.5" style="stroke: #000000; stroke-width: 1.5;"/>
+    <line style="stroke: #000000; stroke-width: 1.5;" x1="32" x2="81" y1="197.7969" y2="197.7969"/>
+    <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="36" x="36" y="190.4951">auth</text>
+    <!--MD5=[f3a41e5fb7468555ad6da6d64a50e772]
+cluster jwt-->
+    <polygon fill="#FFFFFF" filter="url(#fbu15of9q5kgc)" points="14,16,45,16,52,38.2969,158,38.2969,158,99,14,99,14,16" style="stroke: #000000; stroke-width: 1.5;"/>
+    <line style="stroke: #000000; stroke-width: 1.5;" x1="14" x2="52" y1="38.2969" y2="38.2969"/>
+    <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="25" x="18" y="30.9951">jwt</text>
+    <!--MD5=[4ef80439e1ef409f8f3a0ec422262701]
+cluster server-->
+    <polygon fill="#FFFFFF" filter="url(#fbu15of9q5kgc)" points="310,124,367,124,374,146.2969,953,146.2969,953,348,310,348,310,124" style="stroke: #000000; stroke-width: 1.5;"/>
+    <line style="stroke: #000000; stroke-width: 1.5;" x1="310" x2="374" y1="146.2969" y2="146.2969"/>
+    <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="51" x="314" y="138.9951">server</text>
+    <!--MD5=[857233cdc7018b1e8695fe78ce49561f]
+cluster __builtin__-->
+    <polygon fill="#FFFFFF" filter="url(#fbu15of9q5kgc)" points="326,16,384,16,391,38.2969,410,38.2969,410,99,326,99,326,16" style="stroke: #000000; stroke-width: 1.5;"/>
+    <line style="stroke: #000000; stroke-width: 1.5;" x1="326" x2="391" y1="38.2969" y2="38.2969"/>
+    <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="52" x="330" y="30.9951">builtin</text>
+    <!--MD5=[b06b8b108e34b08e24c821e3b10bf0ab]
+class auth.Account-->
+    <rect fill="#FEFECE" filter="url(#fbu15of9q5kgc)" height="86.4141" id="auth.Account" style="stroke: #A80036; stroke-width: 1.5;" width="116" x="167" y="202.5"/>
+    <ellipse cx="197.3" cy="218.5" fill="#7FFFD4" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <path d="M196.5344,219.0625 Q194.675,218.3594 194.0266,217.5859 Q193.3781,216.8125 193.3781,215.5 Q193.3781,213.8125 194.4563,212.8438 Q195.5344,211.875 197.4094,211.875 Q198.2688,211.875 199.1203,212.0703 Q199.9719,212.2656 200.8156,212.6563 L200.8156,215.0469 Q200.0344,214.4844 199.2141,214.1953 Q198.3938,213.9063 197.5969,213.9063 Q196.7219,213.9063 196.2453,214.2656 Q195.7688,214.625 195.7688,215.2813 Q195.7688,215.7969 196.1125,216.1328 Q196.4563,216.4688 197.55,216.875 L198.6125,217.2813 Q200.0969,217.8281 200.8078,218.7344 Q201.5188,219.6406 201.5188,221.0156 Q201.5188,222.8906 200.4094,223.8125 Q199.3,224.7344 197.05,224.7344 Q196.1281,224.7344 195.2063,224.5156 Q194.2844,224.2969 193.425,223.875 L193.425,221.3438 Q194.3938,222.0313 195.3156,222.375 Q196.2375,222.7188 197.1281,222.7188 Q198.0344,222.7188 198.5344,222.3047 Q199.0344,221.8906 199.0344,221.1563 Q199.0344,220.5938 198.6984,220.1797 Q198.3625,219.7656 197.7375,219.5156 L196.5344,219.0625 Z "/>
+    <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="50" x="214.7" y="222.6543">Account</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="168" x2="282" y1="234.5" y2="234.5"/>
+    <ellipse cx="178" cy="245.5" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="187" y="248.7104">Login string</text>
+    <ellipse cx="178" cy="258.3047" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="187" y="261.5151">Password string</text>
+    <ellipse cx="178" cy="271.1094" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="70" x="187" y="274.3198">Token string</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="168" x2="282" y1="280.9141" y2="280.9141"/>
+    <!--MD5=[13511467e4743de356770a6897164db9]
+class auth.Token-->
+    <rect fill="#FEFECE" filter="url(#fbu15of9q5kgc)" height="60.8047" id="auth.Token" style="stroke: #A80036; stroke-width: 1.5;" width="92" x="40" y="215"/>
+    <ellipse cx="65.8" cy="231" fill="#7FFFD4" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <path d="M65.0344,231.5625 Q63.175,230.8594 62.5266,230.0859 Q61.8781,229.3125 61.8781,228 Q61.8781,226.3125 62.9563,225.3438 Q64.0344,224.375 65.9094,224.375 Q66.7688,224.375 67.6203,224.5703 Q68.4719,224.7656 69.3156,225.1563 L69.3156,227.5469 Q68.5344,226.9844 67.7141,226.6953 Q66.8938,226.4063 66.0969,226.4063 Q65.2219,226.4063 64.7453,226.7656 Q64.2688,227.125 64.2688,227.7813 Q64.2688,228.2969 64.6125,228.6328 Q64.9563,228.9688 66.05,229.375 L67.1125,229.7813 Q68.5969,230.3281 69.3078,231.2344 Q70.0188,232.1406 70.0188,233.5156 Q70.0188,235.3906 68.9094,236.3125 Q67.8,237.2344 65.55,237.2344 Q64.6281,237.2344 63.7063,237.0156 Q62.7844,236.7969 61.925,236.375 L61.925,233.8438 Q62.8938,234.5313 63.8156,234.875 Q64.7375,235.2188 65.6281,235.2188 Q66.5344,235.2188 67.0344,234.8047 Q67.5344,234.3906 67.5344,233.6563 Q67.5344,233.0938 67.1984,232.6797 Q66.8625,232.2656 66.2375,232.0156 L65.0344,231.5625 Z "/>
+    <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="36" x="82.2" y="235.1543">Token</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="41" x2="131" y1="247" y2="247"/>
+    <ellipse cx="51" cy="258" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="60" y="261.2104">Login string</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="41" x2="131" y1="267.8047" y2="267.8047"/>
+    <!--MD5=[ba0b3218126c4749a5f303d8720ed5ca]
+class jwt.StandardClaims-->
+    <rect fill="#FEFECE" filter="url(#fbu15of9q5kgc)" height="48" id="jwt.StandardClaims" style="stroke: #A80036; stroke-width: 1.5;" width="127" x="22.5" y="43"/>
+    <ellipse cx="37.5" cy="59" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <path d="M40.4688,64.6406 Q39.8906,64.9375 39.25,65.0859 Q38.6094,65.2344 37.9063,65.2344 Q35.4063,65.2344 34.0859,63.5859 Q32.7656,61.9375 32.7656,58.8125 Q32.7656,55.6875 34.0859,54.0313 Q35.4063,52.375 37.9063,52.375 Q38.6094,52.375 39.2578,52.5313 Q39.9063,52.6875 40.4688,52.9844 L40.4688,55.7031 Q39.8438,55.125 39.25,54.8516 Q38.6563,54.5781 38.0313,54.5781 Q36.6875,54.5781 36,55.6484 Q35.3125,56.7188 35.3125,58.8125 Q35.3125,60.9063 36,61.9766 Q36.6875,63.0469 38.0313,63.0469 Q38.6563,63.0469 39.25,62.7734 Q39.8438,62.5 40.4688,61.9219 L40.4688,64.6406 Z "/>
+    <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="95" x="51.5" y="63.1543">StandardClaims</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="23.5" x2="148.5" y1="75" y2="75"/>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="23.5" x2="148.5" y1="83" y2="83"/>
+    <!--MD5=[432216b430a913c0c278fa18c40328bb]
+class server.Server-->
+    <rect fill="#FEFECE" filter="url(#fbu15of9q5kgc)" height="188.8516" id="server.Server" style="stroke: #A80036; stroke-width: 1.5;" width="359" x="585.5" y="151"/>
+    <ellipse cx="741.25" cy="167" fill="#7FFFD4" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <path d="M740.4844,167.5625 Q738.625,166.8594 737.9766,166.0859 Q737.3281,165.3125 737.3281,164 Q737.3281,162.3125 738.4063,161.3438 Q739.4844,160.375 741.3594,160.375 Q742.2188,160.375 743.0703,160.5703 Q743.9219,160.7656 744.7656,161.1563 L744.7656,163.5469 Q743.9844,162.9844 743.1641,162.6953 Q742.3438,162.4063 741.5469,162.4063 Q740.6719,162.4063 740.1953,162.7656 Q739.7188,163.125 739.7188,163.7813 Q739.7188,164.2969 740.0625,164.6328 Q740.4063,164.9688 741.5,165.375 L742.5625,165.7813 Q744.0469,166.3281 744.7578,167.2344 Q745.4688,168.1406 745.4688,169.5156 Q745.4688,171.3906 744.3594,172.3125 Q743.25,173.2344 741,173.2344 Q740.0781,173.2344 739.1563,173.0156 Q738.2344,172.7969 737.375,172.375 L737.375,169.8438 Q738.3438,170.5313 739.2656,170.875 Q740.1875,171.2188 741.0781,171.2188 Q741.9844,171.2188 742.4844,170.8047 Q742.9844,170.3906 742.9844,169.6563 Q742.9844,169.0938 742.6484,168.6797 Q742.3125,168.2656 741.6875,168.0156 L740.4844,167.5625 Z "/>
+    <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="39" x="761.75" y="171.1543">Server</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="586.5" x2="943.5" y1="183" y2="183"/>
+    <ellipse cx="596.5" cy="194" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="605.5" y="197.2104">Address string</text>
+    <ellipse cx="596.5" cy="206.8047" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="65" x="605.5" y="210.0151">LDAP string</text>
+    <ellipse cx="596.5" cy="219.6094" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="605.5" y="222.8198">Proxy string</text>
+    <ellipse cx="596.5" cy="232.4141" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="102" x="605.5" y="235.6245">ProxyPrefix string</text>
+    <ellipse cx="596.5" cy="245.2188" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="162" x="605.5" y="248.4292">Transport http.RoundTripper</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="586.5" x2="943.5" y1="255.0234" y2="255.0234"/>
+    <rect fill="#F24D5C" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="593.5" y="263.0234"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="333" x="605.5" y="269.2339">addDefaultHeaders(nextHandler http.Handler) http.Handler</text>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="609.5" y="282.0386"/>
+    <ellipse cx="596.5" cy="291.6328" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="314" x="605.5" y="294.8433">HandleHTTP(w http.ResponseWriter, req *http.Request)</text>
+    <ellipse cx="596.5" cy="304.4375" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="54" x="605.5" y="307.6479">Initialize()</text>
+    <ellipse cx="596.5" cy="317.2422" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="324" x="605.5" y="320.4526">Login(writer http.ResponseWriter, request *http.Request)</text>
+    <ellipse cx="596.5" cy="330.0469" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="283" x="605.5" y="333.2573">JWTAuthentication(next http.Handler) http.Handler</text>
+    <!--MD5=[ef8cf0d62b916d236242adaf2ff2d7f8]
+class server.Status-->
+    <rect fill="#FEFECE" filter="url(#fbu15of9q5kgc)" height="60.8047" id="server.Status" style="stroke: #A80036; stroke-width: 1.5;" width="97" x="453.5" y="215"/>
+    <ellipse cx="480.2" cy="231" fill="#7FFFD4" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <path d="M479.4344,231.5625 Q477.575,230.8594 476.9266,230.0859 Q476.2781,229.3125 476.2781,228 Q476.2781,226.3125 477.3563,225.3438 Q478.4344,224.375 480.3094,224.375 Q481.1688,224.375 482.0203,224.5703 Q482.8719,224.7656 483.7156,225.1563 L483.7156,227.5469 Q482.9344,226.9844 482.1141,226.6953 Q481.2938,226.4063 480.4969,226.4063 Q479.6219,226.4063 479.1453,226.7656 Q478.6688,227.125 478.6688,227.7813 Q478.6688,228.2969 479.0125,228.6328 Q479.3563,228.9688 480.45,229.375 L481.5125,229.7813 Q482.9969,230.3281 483.7078,231.2344 Q484.4188,232.1406 484.4188,233.5156 Q484.4188,235.3906 483.3094,236.3125 Q482.2,237.2344 479.95,237.2344 Q479.0281,237.2344 478.1063,237.0156 Q477.1844,236.7969 476.325,236.375 L476.325,233.8438 Q477.2938,234.5313 478.2156,234.875 Q479.1375,235.2188 480.0281,235.2188 Q480.9344,235.2188 481.4344,234.8047 Q481.9344,234.3906 481.9344,233.6563 Q481.9344,233.0938 481.5984,232.6797 Q481.2625,232.2656 480.6375,232.0156 L479.4344,231.5625 Z "/>
+    <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="39" x="496.8" y="235.1543">Status</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="454.5" x2="549.5" y1="247" y2="247"/>
+    <ellipse cx="464.5" cy="258" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/>
+    <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="473.5" y="261.2104">Status string</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="454.5" x2="549.5" y1="267.8047" y2="267.8047"/>
+    <!--MD5=[3b3f54253688d0a9e97522155b7868d0]
+class server.contextKey-->
+    <rect fill="#FEFECE" filter="url(#fbu15of9q5kgc)" height="48" id="server.contextKey" style="stroke: #A80036; stroke-width: 1.5;" width="100" x="318" y="221.5"/>
+    <ellipse cx="333" cy="237.5" fill="#FF7700" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <path d="M334.3438,244 L331.8906,244 L331.8906,233.75 L328.75,233.75 L328.75,231.6094 L337.4844,231.6094 L337.4844,233.75 L334.3438,233.75 L334.3438,244 Z "/>
+    <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="347" y="241.6543">contextKey</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="319" x2="417" y1="253.5" y2="253.5"/>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="319" x2="417" y1="261.5" y2="261.5"/>
+    <!--MD5=[aaadaf5c3ad6e0e0dd8a1e035309d301]
+class __builtin__.string-->
+    <rect fill="#FEFECE" filter="url(#fbu15of9q5kgc)" height="48" id="__builtin__.string" style="stroke: #A80036; stroke-width: 1.5;" width="67" x="334.5" y="43"/>
+    <ellipse cx="349.5" cy="59" fill="#ADD1B2" rx="11" ry="11" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <path d="M352.4688,64.6406 Q351.8906,64.9375 351.25,65.0859 Q350.6094,65.2344 349.9063,65.2344 Q347.4063,65.2344 346.0859,63.5859 Q344.7656,61.9375 344.7656,58.8125 Q344.7656,55.6875 346.0859,54.0313 Q347.4063,52.375 349.9063,52.375 Q350.6094,52.375 351.2578,52.5313 Q351.9063,52.6875 352.4688,52.9844 L352.4688,55.7031 Q351.8438,55.125 351.25,54.8516 Q350.6563,54.5781 350.0313,54.5781 Q348.6875,54.5781 348,55.6484 Q347.3125,56.7188 347.3125,58.8125 Q347.3125,60.9063 348,61.9766 Q348.6875,63.0469 350.0313,63.0469 Q350.6563,63.0469 351.25,62.7734 Q351.8438,62.5 352.4688,61.9219 L352.4688,64.6406 Z "/>
+    <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="35" x="363.5" y="63.1543">string</text>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="335.5" x2="400.5" y1="75" y2="75"/>
+    <line style="stroke: #A80036; stroke-width: 1.5;" x1="335.5" x2="400.5" y1="83" y2="83"/>
+    <!--MD5=[21adbf30cb3d6b15d649e89276ad5f22]
+reverse link jwt.StandardClaims to auth.Token-->
+    <path d="M86,104.1659 C86,136.9926 86,184.2797 86,214.9495 " fill="none" id="jwt.StandardClaims&lt;-auth.Token" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <polygon fill="#A80036" points="86,91.0733,82,97.0733,86,103.0733,90,97.0733,86,91.0733" style="stroke: #A80036; stroke-width: 1.0;"/>
+    <!--MD5=[1c2bed0ae8f975c7a7140a449033c0e2]
+reverse link __builtin__.string to server.contextKey-->
+    <path d="M368,96.4716 C368,131.3591 368,188.8028 368,221.238 " fill="none" id="__builtin__.string&lt;-server.contextKey" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/>
+    <rect fill="#FFFFFF" height="10" style="stroke: #A80036; stroke-width: 1.5;" width="10" x="363" y="86.0733"/>
+    <!--MD5=[13f0a66d8f5a4948fc35f81ceeb01cb8]
+@startuml
+namespace auth {
+    class Account << (S,Aquamarine) >> {
+        + Login string
+        + Password string
+        + Token string
+
+    }
+    class Token << (S,Aquamarine) >> {
+        + Login string
+
+    }
+}
+"jwt.StandardClaims" *- - "auth.Token"
+
+
+namespace server {
+    class Server << (S,Aquamarine) >> {
+        + Address string
+        + LDAP string
+        + Proxy string
+        + ProxyPrefix string
+        + Transport http.RoundTripper
+
+        - addDefaultHeaders(nextHandler http.Handler) http.Handler
+
+        + HandleHTTP(w http.ResponseWriter, req *http.Request) 
+        + Initialize() 
+        + Login(writer http.ResponseWriter, request *http.Request) 
+        + JWTAuthentication(next http.Handler) http.Handler
+
+    }
+    class Status << (S,Aquamarine) >> {
+        + Status string
+
+    }
+    class server.contextKey << (T, #FF7700) >>  {
+    }
+}
+
+
+"__builtin__.string" #.. "server.contextKey"
+@enduml
+
+PlantUML version 1.2019.12(Sun Nov 03 11:24:54 CET 2019)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 1.8.0_191-b12
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+-->
+  </g>
+</svg>
