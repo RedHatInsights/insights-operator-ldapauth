@@ -58,6 +58,8 @@ func ldapAuth(login string, password string, client ldap.Client) (bool, error) {
 	var err error
 
 	// Reconnect with TLS
+	// disable "G402 (CWE-295): TLS InsecureSkipVerify set true."
+	// #nosec G402
 	err = client.StartTLS(&tls.Config{InsecureSkipVerify: true})
 	if err != nil {
 		return false, err
