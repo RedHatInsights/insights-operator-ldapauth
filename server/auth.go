@@ -23,7 +23,6 @@ import (
 	auth "github.com/redhatinsights/insights-operator-ldapauth/auth"
 	"github.com/redhatinsights/insights-operator-utils/responses"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -83,7 +82,7 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 		tk := &auth.Token{}
 
 		token, err := jwt.ParseWithClaims(tokenPart, tk, func(token *jwt.Token) (interface{}, error) {
-			return []byte(os.Getenv("token_password")), nil
+			return auth.GetTokenPasswordFromEnv(), nil
 		})
 
 		if err != nil { //Malformed token, returns with http code 403 as usual
