@@ -45,6 +45,13 @@ type Account struct {
 	Token    string `json:"token"`
 }
 
+// GetTokenPasswordFromEnv tries to read token password from the environment
+// variable. Content of the variable (string) is converted into array of bytes
+// to be usable.
+func GetTokenPasswordFromEnv() []byte {
+	return []byte(os.Getenv("token_password"))
+}
+
 func createLdapConnection(ldapHost string) (*ldap.Conn, error) {
 	var err error
 	conn, err := ldap.Dial("tcp", fmt.Sprintf("%s:%d", ldapHost, 389))
@@ -132,7 +139,7 @@ func Authenticate(login, password, ldap string) (map[string]interface{}, error) 
 	//Create JWT token
 	tk := &Token{Login: account.Login}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
-	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
+	tokenString, _ := token.SignedString(GetTokenPasswordFromEnv())
 	account.Token = tokenString //Store the token in the response
 
 	resp := responses.BuildResponse("ok")
