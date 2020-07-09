@@ -1,0 +1,43 @@
+@startuml
+namespace auth {
+    class Account << (S,Aquamarine) >> {
+        + Login string
+        + Password string
+        + Token string
+
+    }
+    class Token << (S,Aquamarine) >> {
+        + Login string
+
+    }
+}
+"jwt.StandardClaims" *-- "auth.Token"
+
+
+namespace server {
+    class Server << (S,Aquamarine) >> {
+        + Address string
+        + LDAP string
+        + Proxy string
+        + ProxyPrefix string
+        + Transport http.RoundTripper
+
+        - addDefaultHeaders(nextHandler http.Handler) http.Handler
+
+        + HandleHTTP(w http.ResponseWriter, req *http.Request) 
+        + Initialize() 
+        + Login(writer http.ResponseWriter, request *http.Request) 
+        + JWTAuthentication(next http.Handler) http.Handler
+
+    }
+    class Status << (S,Aquamarine) >> {
+        + Status string
+
+    }
+    class server.contextKey << (T, #FF7700) >>  {
+    }
+}
+
+
+"__builtin__.string" #.. "server.contextKey"
+@enduml
