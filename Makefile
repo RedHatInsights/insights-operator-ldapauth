@@ -29,6 +29,10 @@ cyclo: ## Run gocyclo
 
 style: fmt vet lint cyclo ## Run all the formatting related commands (fmt, vet, lint, cyclo)
 
+license:
+	GO111MODULE=off go get -u github.com/google/addlicense && \
+		addlicense -c "Red Hat, Inc" -l "apache" -v ./
+
 docs/packages/%.html: %.go
 	mkdir -p $(dir $@)
 	docgo -outdir $(dir $@) $^
