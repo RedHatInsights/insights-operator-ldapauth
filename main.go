@@ -13,6 +13,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+// Entry point to the LDAP proxy service.
+//
+// That service contains implementation of authentication mechanism used to
+// validate user credentials and create auth token.
+//
+// Generated documentation is available at:
+// https://godoc.org/github.com/RedHatInsights/insights-operator-ldapauth/
 package main
 
 import (
