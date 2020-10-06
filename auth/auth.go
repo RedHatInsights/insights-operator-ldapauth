@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Package auth contains implementation of authentication mechanism used to
+// validate user credentials and create auth token.
+//
+// Generated documentation is available at:
+// https://godoc.org/github.com/RedHatInsights/insights-operator-ldapauth/auth
 package auth
 
 import (
