@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Package server contains implementation of REST API server (HTTPServer) for the
+// LDAP proxy.
+//
+// Generated documentation is available at:
+// https://godoc.org/github.com/RedHatInsights/insights-operator-ldapauth/server
 package server
 
 import (
