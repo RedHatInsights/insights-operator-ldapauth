@@ -19,6 +19,9 @@ limitations under the License.
 //
 // Generated documentation is available at:
 // https://godoc.org/github.com/RedHatInsights/insights-operator-ldapauth/auth
+//
+// Documentation in literate-programming-style is available at:
+// https://redhatinsights.github.io/insights-operator-ldapauth/packages/auth/auth.html
 package auth
 
 import (
