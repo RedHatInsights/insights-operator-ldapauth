@@ -1,3 +1,4 @@
 .DS_Store
 insights-operator-ldapauth
 coverage.out
+issue.py
