@@ -16,6 +16,9 @@ limitations under the License.
 
 package server
 
+// Documentation in literate-programming-style is available at:
+// https://redhatinsights.github.io/insights-operator-ldapauth/packages/server/proxy.html
+
 import (
 	"io"
 	"log"
