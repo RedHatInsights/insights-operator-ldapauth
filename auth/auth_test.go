@@ -16,6 +16,9 @@ limitations under the License.
 
 package auth
 
+// Documentation in literate-programming-style is available at:
+// https://redhatinsights.github.io/insights-operator-ldapauth/packages/auth/auth_test.html
+
 import (
 	"crypto/tls"
 	"testing"
