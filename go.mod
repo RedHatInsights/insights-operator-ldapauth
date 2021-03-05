@@ -1,6 +1,6 @@
 module github.com/redhatinsights/insights-operator-ldapauth
 
-go 1.13
+go 1.14
 
 require (
 	github.com/ZachtimusPrime/Go-Splunk-HTTP v0.0.0-20190909123348-f5369e72b8af
