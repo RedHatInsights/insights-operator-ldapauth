@@ -14,7 +14,7 @@
 
 language: go
 go:
-- 1.13
+- 1.16
 
 jobs:
   include:
