@@ -8,6 +8,23 @@
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/RedHatInsights/insights-operator-ldapauth)
 [![License](https://img.shields.io/badge/license-Apache-blue)](https://github.com/RedHatInsights/insights-operator-ldapauth/blob/master/LICENSE)
 
+<!-- vim-markdown-toc GFM -->
+
+* [Overview](#overview)
+    * [Authorization part](#authorization-part)
+    * [Authorization sequence diagram for known user with proper token](#authorization-sequence-diagram-for-known-user-with-proper-token)
+    * [Authorization sequence diagram in case of any error](#authorization-sequence-diagram-in-case-of-any-error)
+* [Starting](#starting)
+* [Authentication](#authentication)
+* [RestAPI](#restapi)
+* [Code style and cyclomatic complexity checks](#code-style-and-cyclomatic-complexity-checks)
+* [Configuration](#configuration)
+    * [Environment variables](#environment-variables)
+* [CI](#ci)
+* [Contribution](#contribution)
+
+<!-- vim-markdown-toc -->
+
 ## Overview
 
 The whole system consists of several components: CLI client, LDAP Auth service, and the Insights operator instrumentation service:
