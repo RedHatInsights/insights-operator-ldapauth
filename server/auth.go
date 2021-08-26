@@ -22,9 +22,9 @@ package server
 import (
 	"context"
 	"encoding/json"
+	"github.com/RedHatInsights/insights-operator-utils/responses"
 	jwt "github.com/dgrijalva/jwt-go"
 	auth "github.com/redhatinsights/insights-operator-ldapauth/auth"
-	"github.com/redhatinsights/insights-operator-utils/responses"
 	"net/http"
 	"strings"
 )
@@ -40,15 +40,15 @@ func (s Server) Login(writer http.ResponseWriter, request *http.Request) {
 	account := &auth.Account{}
 	err := json.NewDecoder(request.Body).Decode(account) //decode the request body into struct and failed if any error occur
 	if err != nil {
-		responses.SendError(writer, "Invalid request")
+		responses.SendBadRequest(writer, "Invalid request")
 		return
 	}
 	resp, err := auth.Authenticate(account.Login, account.Password, s.LDAP)
 	if err != nil {
-		responses.SendUnauthorized(writer, resp)
+		responses.Send(http.StatusUnauthorized, writer, resp)
 		return
 	}
-	responses.SendResponse(writer, resp)
+	responses.SendOK(writer, resp)
 }
 
 // JWTAuthentication - middleware for authenticate user by Token
