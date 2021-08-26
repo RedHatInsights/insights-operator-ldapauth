@@ -32,8 +32,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/RedHatInsights/insights-operator-utils/responses"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/redhatinsights/insights-operator-utils/responses"
 	"gopkg.in/ldap.v3"
 )
 

@@ -25,10 +25,10 @@ limitations under the License.
 package server
 
 import (
+	"github.com/RedHatInsights/insights-operator-utils/env"
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/redhatinsights/insights-operator-utils/env"
 	"log"
 	"net/http"
 	"os"

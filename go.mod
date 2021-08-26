@@ -3,21 +3,16 @@ module github.com/redhatinsights/insights-operator-ldapauth
 go 1.14
 
 require (
+	github.com/RedHatInsights/insights-operator-utils v1.8.2
 	github.com/ZachtimusPrime/Go-Splunk-HTTP v0.0.0-20190909123348-f5369e72b8af
-	github.com/bitly/go-simplejson v0.5.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/fzipp/gocyclo v0.0.0-20150627053110-6acd4345c835 // indirect
-	github.com/gorilla/context v1.1.1 // indirect
-	github.com/gorilla/mux v1.7.3
+	github.com/gorilla/mux v1.8.0
 	github.com/jtblin/go-ldap-client v0.0.0-20170223121919-b73f66626b33
-	github.com/mattn/go-sqlite3 v1.11.0
-	github.com/mozillazg/request v0.8.0 // indirect
+	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/nerney/dappy v0.0.0-20190604173756-4d42df77810f
-	github.com/prometheus/client_golang v1.1.0
-	github.com/redhatinsights/insights-operator-utils v0.0.0-20200113143156-1cae7686c2e4
-	github.com/spf13/viper v1.4.0
+	github.com/prometheus/client_golang v1.10.0
+	github.com/spf13/viper v1.7.1
 	github.com/verdverm/frisby v0.0.0-20170604211311-b16556248a9a
-	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
-	golang.org/x/lint v0.0.0-20191125180803-fdd1cda4f05f // indirect
+	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0
 	gopkg.in/ldap.v3 v3.0.3
 )
