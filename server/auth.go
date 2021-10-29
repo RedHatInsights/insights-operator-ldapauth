@@ -38,7 +38,9 @@ const (
 // Login handler for login route
 func (s Server) Login(writer http.ResponseWriter, request *http.Request) {
 	account := &auth.Account{}
-	err := json.NewDecoder(request.Body).Decode(account) //decode the request body into struct and failed if any error occur
+
+	// decode the request body into struct and failed if any error occur
+	err := json.NewDecoder(request.Body).Decode(account)
 	if err != nil {
 		responses.SendBadRequest(writer, "Invalid request")
 		return
