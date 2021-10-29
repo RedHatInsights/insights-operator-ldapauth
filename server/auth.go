@@ -100,7 +100,8 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 			return
 		}
 
-		if !token.Valid { //Token is invalid, maybe not signed on this server
+		if !token.Valid {
+			// Token is invalid, maybe not signed on this server
 			responses.SendForbidden(w, "Token is not valid.")
 			return
 		}
