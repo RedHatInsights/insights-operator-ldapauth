@@ -144,7 +144,7 @@ func Authenticate(login, password, ldap string) (map[string]interface{}, error) 
 		return r, err
 	}
 
-	//Create JWT token
+	// Create JWT token
 	tk := &Token{Login: account.Login}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
 	tokenString, _ := token.SignedString(GetTokenPasswordFromEnv())
