@@ -71,7 +71,8 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 			}
 		}
 
-		tokenHeader := r.Header.Get("Authorization") //Grab the token from the header
+		// Grab the token from the header
+		tokenHeader := r.Header.Get("Authorization")
 
 		if tokenHeader == "" { //Token is missing, returns with error code 403 Unauthorized
 			responses.SendForbidden(w, "Missing auth token")
