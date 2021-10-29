@@ -113,8 +113,6 @@ func ldapAuth(login string, password string, client ldap.Client) (bool, error) {
 		return false, errors.New(NoAccessMessage)
 	}
 
-	// userdn := sr.Entries[0].DN
-
 	// Bind as the user to verify their password
 	err = client.Bind(sr.Entries[0].DN, password)
 	if err != nil {
