@@ -148,7 +148,9 @@ func Authenticate(login, password, ldap string) (map[string]interface{}, error) 
 	tk := &Token{Login: account.Login}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
 	tokenString, _ := token.SignedString(GetTokenPasswordFromEnv())
-	account.Token = tokenString //Store the token in the response
+
+	// Store the token in the response
+	account.Token = tokenString
 
 	resp := responses.BuildResponse("ok")
 	resp["account"] = account
