@@ -34,7 +34,7 @@ type MockLdapClient struct {
 }
 
 func (mlc *MockLdapClient) Start() {
-	//noop
+	// noop
 }
 
 func (mlc *MockLdapClient) StartTLS(config *tls.Config) error {
@@ -42,7 +42,7 @@ func (mlc *MockLdapClient) StartTLS(config *tls.Config) error {
 }
 
 func (mlc *MockLdapClient) Close() {
-	//noop
+	// noop
 }
 
 func (mlc *MockLdapClient) SetTimeout(t time.Duration) {

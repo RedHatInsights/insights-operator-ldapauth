@@ -37,7 +37,7 @@ import (
 	"gopkg.in/ldap.v3"
 )
 
-//NoAccessMessage - Error message for user with no access
+// NoAccessMessage - Error message for user with no access
 const NoAccessMessage = "User has no rights to access"
 
 // Token JWT claims struct
@@ -113,8 +113,6 @@ func ldapAuth(login string, password string, client ldap.Client) (bool, error) {
 		return false, errors.New(NoAccessMessage)
 	}
 
-	// userdn := sr.Entries[0].DN
-
 	// Bind as the user to verify their password
 	err = client.Bind(sr.Entries[0].DN, password)
 	if err != nil {
@@ -144,11 +142,13 @@ func Authenticate(login, password, ldap string) (map[string]interface{}, error) 
 		return r, err
 	}
 
-	//Create JWT token
+	// Create JWT token
 	tk := &Token{Login: account.Login}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
 	tokenString, _ := token.SignedString(GetTokenPasswordFromEnv())
-	account.Token = tokenString //Store the token in the response
+
+	// Store the token in the response
+	account.Token = tokenString
 
 	resp := responses.BuildResponse("ok")
 	resp["account"] = account

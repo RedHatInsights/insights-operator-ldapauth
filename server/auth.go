@@ -38,7 +38,9 @@ const (
 // Login handler for login route
 func (s Server) Login(writer http.ResponseWriter, request *http.Request) {
 	account := &auth.Account{}
-	err := json.NewDecoder(request.Body).Decode(account) //decode the request body into struct and failed if any error occur
+
+	// decode the request body into struct and failed if any error occur
+	err := json.NewDecoder(request.Body).Decode(account)
 	if err != nil {
 		responses.SendBadRequest(writer, "Invalid request")
 		return
@@ -56,8 +58,11 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		notAuth := []string{APIPrefix + "login"} //List of endpoints that doesn't require auth
-		requestPath := r.URL.Path                //current request path
+		// List of endpoints that doesn't require auth
+		notAuth := []string{APIPrefix + "login"}
+
+		// current request path
+		requestPath := r.URL.Path
 
 		//check if request does not need authentication, serve the request if it doesn't need it
 		for _, value := range notAuth {
@@ -68,9 +73,11 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 			}
 		}
 
-		tokenHeader := r.Header.Get("Authorization") //Grab the token from the header
+		// Grab the token from the header
+		tokenHeader := r.Header.Get("Authorization")
 
-		if tokenHeader == "" { //Token is missing, returns with error code 403 Unauthorized
+		if tokenHeader == "" {
+			// Token is missing, return with HTTP error code 403 Unauthorized
 			responses.SendForbidden(w, "Missing auth token")
 			return
 		}
@@ -93,7 +100,8 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 			return
 		}
 
-		if !token.Valid { //Token is invalid, maybe not signed on this server
+		if !token.Valid {
+			// Token is invalid, maybe not signed on this server
 			responses.SendForbidden(w, "Token is not valid.")
 			return
 		}
