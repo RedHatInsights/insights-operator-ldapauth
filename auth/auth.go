@@ -37,7 +37,7 @@ import (
 	"gopkg.in/ldap.v3"
 )
 
-//NoAccessMessage - Error message for user with no access
+// NoAccessMessage - Error message for user with no access
 const NoAccessMessage = "User has no rights to access"
 
 // Token JWT claims struct
