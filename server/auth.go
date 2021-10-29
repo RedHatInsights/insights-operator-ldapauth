@@ -58,7 +58,9 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 
 		// List of endpoints that doesn't require auth
 		notAuth := []string{APIPrefix + "login"}
-		requestPath := r.URL.Path //current request path
+
+		// current request path
+		requestPath := r.URL.Path
 
 		//check if request does not need authentication, serve the request if it doesn't need it
 		for _, value := range notAuth {
