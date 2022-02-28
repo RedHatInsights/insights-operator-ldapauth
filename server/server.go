@@ -1,5 +1,5 @@
 /*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -101,9 +101,7 @@ func (s Server) Initialize() {
 
 	log.Println("Starting HTTP server at", s.Address)
 
-	var err error
-
-	err = http.ListenAndServe(s.Address, router)
+	err := http.ListenAndServe(s.Address, router)
 	if err != nil {
 		log.Fatal("Unable to initialize HTTP server", err)
 		os.Exit(2)
