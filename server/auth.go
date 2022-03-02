@@ -1,5 +1,5 @@
 /*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import (
 	"github.com/RedHatInsights/insights-operator-utils/responses"
 	jwt "github.com/dgrijalva/jwt-go"
 	auth "github.com/redhatinsights/insights-operator-ldapauth/auth"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -42,15 +43,24 @@ func (s Server) Login(writer http.ResponseWriter, request *http.Request) {
 	// decode the request body into struct and failed if any error occur
 	err := json.NewDecoder(request.Body).Decode(account)
 	if err != nil {
-		responses.SendBadRequest(writer, "Invalid request")
+		err := responses.SendBadRequest(writer, "Invalid request")
+		if err != nil {
+			log.Println(err)
+		}
 		return
 	}
 	resp, err := auth.Authenticate(account.Login, account.Password, s.LDAP)
 	if err != nil {
-		responses.Send(http.StatusUnauthorized, writer, resp)
+		err := responses.Send(http.StatusUnauthorized, writer, resp)
+		if err != nil {
+			log.Println(err)
+		}
 		return
 	}
-	responses.SendOK(writer, resp)
+	err = responses.SendOK(writer, resp)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 // JWTAuthentication - middleware for authenticate user by Token
@@ -78,13 +88,19 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 
 		if tokenHeader == "" {
 			// Token is missing, return with HTTP error code 403 Unauthorized
-			responses.SendForbidden(w, "Missing auth token")
+			err := responses.SendForbidden(w, "Missing auth token")
+			if err != nil {
+				log.Println(err)
+			}
 			return
 		}
 
 		splitted := strings.Split(tokenHeader, " ") //The token normally comes in format `Bearer {token-body}`, we check if the retrieved token matched this requirement
 		if len(splitted) != 2 {
-			responses.SendForbidden(w, "Invalid/Malformed auth token")
+			err := responses.SendForbidden(w, "Invalid/Malformed auth token")
+			if err != nil {
+				log.Println(err)
+			}
 			return
 		}
 
@@ -96,13 +112,19 @@ func (s Server) JWTAuthentication(next http.Handler) http.Handler {
 		})
 
 		if err != nil { //Malformed token, returns with http code 403 as usual
-			responses.SendForbidden(w, "Malformed authentication token")
+			err := responses.SendForbidden(w, "Malformed authentication token")
+			if err != nil {
+				log.Println(err)
+			}
 			return
 		}
 
 		if !token.Valid {
 			// Token is invalid, maybe not signed on this server
-			responses.SendForbidden(w, "Token is not valid.")
+			err := responses.SendForbidden(w, "Token is not valid.")
+			if err != nil {
+				log.Println(err)
+			}
 			return
 		}
 
