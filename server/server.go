@@ -27,8 +27,6 @@ package server
 import (
 	"github.com/RedHatInsights/insights-operator-utils/env"
 	"github.com/gorilla/mux"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promauto"
 	"log"
 	"net/http"
 	"os"
@@ -45,17 +43,6 @@ type Server struct {
 	ProxyPrefix string
 	Transport   http.RoundTripper
 }
-
-var apiRequests = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "api_endpoints_requests",
-	Help: "The total number requests per API endpoint",
-}, []string{"url"})
-
-var apiResponses = promauto.NewHistogramVec(prometheus.HistogramOpts{
-	Name:    "response_time",
-	Help:    "Response time",
-	Buckets: prometheus.LinearBuckets(0, 20, 20),
-}, []string{"url"})
 
 // Status structure for RestAPI response
 type Status struct {
