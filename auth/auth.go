@@ -1,5 +1,5 @@
 /*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ func createLdapConnection(ldapHost string) (*ldap.Conn, error) {
 	return conn, nil
 }
 
-func ldapAuth(login string, password string, client ldap.Client) (bool, error) {
+func ldapAuth(login, password string, client ldap.Client) (bool, error) {
 	var err error
 
 	// Reconnect with TLS
