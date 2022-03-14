@@ -122,12 +122,12 @@ func ldapAuth(login, password string, client ldap.Client) (bool, error) {
 }
 
 // Authenticate - validate user credentials and create auth token
-func Authenticate(login, password, ldap string) (map[string]interface{}, error) {
+func Authenticate(login, password, ldapHost string) (map[string]interface{}, error) {
 	var err error
 	account := &Account{}
 	account.Login = login
 
-	conn, err := createLdapConnection(ldap)
+	conn, err := createLdapConnection(ldapHost)
 	if err != nil {
 		log.Println(err)
 		r := responses.BuildResponse(err.Error())
