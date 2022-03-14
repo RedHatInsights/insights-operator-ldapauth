@@ -1,5 +1,5 @@
 /*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ func (mlc *MockLdapClient) Close() {
 }
 
 func (mlc *MockLdapClient) SetTimeout(t time.Duration) {
-	//noop
+	// noop
 }
 
 func (mlc *MockLdapClient) Bind(username, password string) error {
