@@ -1,5 +1,5 @@
 /*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -34,15 +34,15 @@ import (
 	"github.com/RedHatInsights/insights-operator-utils/env"
 	"github.com/redhatinsights/insights-operator-ldapauth/server"
 	"github.com/spf13/viper"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strings"
 )
 
 func createTLS(tlsCert, tlsKey string) http.RoundTripper {
-	caCert, err := ioutil.ReadFile(tlsCert)
+	caCert, err := os.ReadFile(tlsCert)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,6 +1,6 @@
 module github.com/redhatinsights/insights-operator-ldapauth
 
-go 1.14
+go 1.16
 
 require (
 	github.com/RedHatInsights/insights-operator-utils v1.8.2
