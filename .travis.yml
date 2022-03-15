@@ -14,10 +14,14 @@
 
 language: go
 go:
-- 1.16
+- "1.16"
 
 jobs:
   include:
+    - name: "Build 1.16"
+      stage: build
+      script:
+        - make
     - stage: unit tests
       script:
         - make test
@@ -30,5 +34,6 @@ jobs:
         - make style
 
 stages:
+  - build
   - style
   - unit tests
