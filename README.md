@@ -22,6 +22,7 @@
     * [Environment variables](#environment-variables)
 * [CI](#ci)
 * [Contribution](#contribution)
+* [Package manifest](#package-manifest)
 
 <!-- vim-markdown-toc -->
 
@@ -130,3 +131,7 @@ History of checks done by CI is available at [RedHatInsights / insights-operator
 Please look into document [CONTRIBUTING.md](CONTRIBUTING.md) that contains all information about how to contribute to this project.
 
 Please look also at [Definition of Done](DoD.md) document with further information.
+
+## Package manifest
+
+Package manifest is available at [docs/manifest.txt](docs/manifest.txt).
