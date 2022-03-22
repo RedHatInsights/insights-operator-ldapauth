@@ -14,5 +14,6 @@
 # limitations under the License.
 
 
-cd "$(dirname $0)"
+cd "$(dirname "$0")" || exit
+
 go vet `go list ./...`
