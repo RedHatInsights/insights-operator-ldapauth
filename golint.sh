@@ -22,7 +22,8 @@ then
     GO111MODULE=off go get golang.org/x/lint/golint 2> /dev/null
 fi
 
-if golint `go list ./...` |
+# shellcheck disable=SC2046
+if golint $(go list ./...) |
     grep -v ALL_CAPS |
     grep .; then
   exit 1
