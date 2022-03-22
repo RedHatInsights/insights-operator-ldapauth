@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-cd "$(dirname $0)"
+cd "$(dirname "$0")" || exit
 
 if ! [ -x "$(command -v golint)" ]
 then
