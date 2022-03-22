@@ -11,6 +11,12 @@ clean: ## Run go clean
 build: ## Run go build
 	@go build
 
+docs/packages/%.html: %.go
+	mkdir -p $(dir $@)
+	docgo -outdir $(dir $@) $^
+
+godoc: ${DOCFILES}
+
 fmt: ## Run go fmt -w for all sources
 	@echo "Running go formatting"
 	./gofmt.sh
@@ -27,11 +33,35 @@ cyclo: ## Run gocyclo
 	@echo "Running gocyclo"
 	./gocyclo.sh
 
-style: fmt vet lint cyclo ## Run all the formatting related commands (fmt, vet, lint, cyclo)
+ineffassign: ## Run ineffassign checker
+	@echo "Running ineffassign checker"
+	./ineffassign.sh
 
-license:
-	GO111MODULE=off go get -u github.com/google/addlicense && \
-		addlicense -c "Red Hat, Inc" -l "apache" -v ./
+shellcheck: ## Run shellcheck
+	./shellcheck.sh
+
+errcheck: ## Run errcheck
+	@echo "Running errcheck"
+	./goerrcheck.sh
+
+goconst: ## Run goconst checker
+	@echo "Running goconst checker"
+	./goconst.sh ${VERBOSE}
+
+gosec: ## Run gosec checker
+	@echo "Running gosec checker"
+	./gosec.sh ${VERBOSE}
+
+abcgo: ## Run ABC metrics checker
+	@echo "Run ABC metrics checker"
+	./abcgo.sh ${VERBOSE}
+
+json-check: ## Check all JSONs for basic syntax
+	@echo "Run JSON checker"
+	python3 utils/json_check.py
+
+style: fmt vet lint cyclo shellcheck errcheck goconst gosec ineffassign abcgo json-check ## Run all the formatting related commands (fmt, vet, lint, cyclo) + check shell scripts
+
 
 docs/packages/%.html: %.go
 	mkdir -p $(dir $@)
