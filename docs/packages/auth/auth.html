@@ -102,7 +102,7 @@
       <tr class="section">
 	<td class="doc"></td>
 	<td class="code"><pre><code><div class="comment">/*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 you may not use this file except in compliance with the License.
@@ -140,8 +140,8 @@ https://redhatinsights.github.io/insights-operator-ldapauth/packages/auth/auth.h
 	<div class="literal">&#34;os&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;strings&#34;</div><div class="operator"></div>
 
+	<div class="literal">&#34;github.com/RedHatInsights/insights-operator-utils/responses&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;github.com/dgrijalva/jwt-go&#34;</div><div class="operator"></div>
-	<div class="literal">&#34;github.com/redhatinsights/insights-operator-utils/responses&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;gopkg.in/ldap.v3&#34;</div><div class="operator"></div>
 <div class="operator">)</div><div class="operator"></div>
 
@@ -197,7 +197,7 @@ to be usable.</p>
 	<div class="keyword">return</div> <div class="ident">conn</div><div class="operator">,</div> <div class="ident">nil</div><div class="operator"></div>
 <div class="operator">}</div><div class="operator"></div>
 
-<div class="keyword">func</div> <div class="ident">ldapAuth</div><div class="operator">(</div><div class="ident">login</div> <div class="ident">string</div><div class="operator">,</div> <div class="ident">password</div> <div class="ident">string</div><div class="operator">,</div> <div class="ident">client</div> <div class="ident">ldap</div><div class="operator">.</div><div class="ident">Client</div><div class="operator">)</div> <div class="operator">(</div><div class="ident">bool</div><div class="operator">,</div> <div class="ident">error</div><div class="operator">)</div> <div class="operator">{</div>
+<div class="keyword">func</div> <div class="ident">ldapAuth</div><div class="operator">(</div><div class="ident">login</div><div class="operator">,</div> <div class="ident">password</div> <div class="ident">string</div><div class="operator">,</div> <div class="ident">client</div> <div class="ident">ldap</div><div class="operator">.</div><div class="ident">Client</div><div class="operator">)</div> <div class="operator">(</div><div class="ident">bool</div><div class="operator">,</div> <div class="ident">error</div><div class="operator">)</div> <div class="operator">{</div>
 	<div class="keyword">var</div> <div class="ident">err</div> <div class="ident">error</div><div class="operator"></div>
 
 </code></pre></td>
@@ -256,13 +256,6 @@ disable &quot;G402 (CWE-295): TLS InsecureSkipVerify set true.&quot;</p>
       </tr>
       
       <tr class="section">
-	<td class="doc"><p>userdn := sr.Entries[0].DN</p>
-</td>
-	<td class="code"><pre><code>
-</code></pre></td>
-      </tr>
-      
-      <tr class="section">
 	<td class="doc"><p>Bind as the user to verify their password</p>
 </td>
 	<td class="code"><pre><code>	<div class="ident">err</div> <div class="operator">=</div> <div class="ident">client</div><div class="operator">.</div><div class="ident">Bind</div><div class="operator">(</div><div class="ident">sr</div><div class="operator">.</div><div class="ident">Entries</div><div class="operator">[</div><div class="literal">0</div><div class="operator">]</div><div class="operator">.</div><div class="ident">DN</div><div class="operator">,</div> <div class="ident">password</div><div class="operator">)</div><div class="operator"></div>
@@ -278,12 +271,12 @@ disable &quot;G402 (CWE-295): TLS InsecureSkipVerify set true.&quot;</p>
       <tr class="section">
 	<td class="doc"><p>Authenticate - validate user credentials and create auth token</p>
 </td>
-	<td class="code"><pre><code><div class="keyword">func</div> <div class="ident">Authenticate</div><div class="operator">(</div><div class="ident">login</div><div class="operator">,</div> <div class="ident">password</div><div class="operator">,</div> <div class="ident">ldap</div> <div class="ident">string</div><div class="operator">)</div> <div class="operator">(</div><div class="keyword">map</div><div class="operator">[</div><div class="ident">string</div><div class="operator">]</div><div class="keyword">interface</div><div class="operator">{</div><div class="operator">}</div><div class="operator">,</div> <div class="ident">error</div><div class="operator">)</div> <div class="operator">{</div>
+	<td class="code"><pre><code><div class="keyword">func</div> <div class="ident">Authenticate</div><div class="operator">(</div><div class="ident">login</div><div class="operator">,</div> <div class="ident">password</div><div class="operator">,</div> <div class="ident">ldapHost</div> <div class="ident">string</div><div class="operator">)</div> <div class="operator">(</div><div class="keyword">map</div><div class="operator">[</div><div class="ident">string</div><div class="operator">]</div><div class="keyword">interface</div><div class="operator">{</div><div class="operator">}</div><div class="operator">,</div> <div class="ident">error</div><div class="operator">)</div> <div class="operator">{</div>
 	<div class="keyword">var</div> <div class="ident">err</div> <div class="ident">error</div><div class="operator"></div>
 	<div class="ident">account</div> <div class="operator">:=</div> <div class="operator">&amp;</div><div class="ident">Account</div><div class="operator">{</div><div class="operator">}</div><div class="operator"></div>
 	<div class="ident">account</div><div class="operator">.</div><div class="ident">Login</div> <div class="operator">=</div> <div class="ident">login</div><div class="operator"></div>
 
-	<div class="ident">conn</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">createLdapConnection</div><div class="operator">(</div><div class="ident">ldap</div><div class="operator">)</div><div class="operator"></div>
+	<div class="ident">conn</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">createLdapConnection</div><div class="operator">(</div><div class="ident">ldapHost</div><div class="operator">)</div><div class="operator"></div>
 	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">{</div>
 		<div class="ident">log</div><div class="operator">.</div><div class="ident">Println</div><div class="operator">(</div><div class="ident">err</div><div class="operator">)</div><div class="operator"></div>
 		<div class="ident">r</div> <div class="operator">:=</div> <div class="ident">responses</div><div class="operator">.</div><div class="ident">BuildResponse</div><div class="operator">(</div><div class="ident">err</div><div class="operator">.</div><div class="ident">Error</div><div class="operator">(</div><div class="operator">)</div><div class="operator">)</div><div class="operator"></div>
@@ -312,7 +305,14 @@ disable &quot;G402 (CWE-295): TLS InsecureSkipVerify set true.&quot;</p>
 	<td class="code"><pre><code>	<div class="ident">tk</div> <div class="operator">:=</div> <div class="operator">&amp;</div><div class="ident">Token</div><div class="operator">{</div><div class="ident">Login</div><div class="operator">:</div> <div class="ident">account</div><div class="operator">.</div><div class="ident">Login</div><div class="operator">}</div><div class="operator"></div>
 	<div class="ident">token</div> <div class="operator">:=</div> <div class="ident">jwt</div><div class="operator">.</div><div class="ident">NewWithClaims</div><div class="operator">(</div><div class="ident">jwt</div><div class="operator">.</div><div class="ident">GetSigningMethod</div><div class="operator">(</div><div class="literal">&#34;HS256&#34;</div><div class="operator">)</div><div class="operator">,</div> <div class="ident">tk</div><div class="operator">)</div><div class="operator"></div>
 	<div class="ident">tokenString</div><div class="operator">,</div> <div class="ident">_</div> <div class="operator">:=</div> <div class="ident">token</div><div class="operator">.</div><div class="ident">SignedString</div><div class="operator">(</div><div class="ident">GetTokenPasswordFromEnv</div><div class="operator">(</div><div class="operator">)</div><div class="operator">)</div><div class="operator"></div>
-	<div class="ident">account</div><div class="operator">.</div><div class="ident">Token</div> <div class="operator">=</div> <div class="ident">tokenString</div> <div class="operator"></div><div class="comment">//Store the token in the response</div>
+
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>Store the token in the response</p>
+</td>
+	<td class="code"><pre><code>	<div class="ident">account</div><div class="operator">.</div><div class="ident">Token</div> <div class="operator">=</div> <div class="ident">tokenString</div><div class="operator"></div>
 
 	<div class="ident">resp</div> <div class="operator">:=</div> <div class="ident">responses</div><div class="operator">.</div><div class="ident">BuildResponse</div><div class="operator">(</div><div class="literal">&#34;ok&#34;</div><div class="operator">)</div><div class="operator"></div>
 	<div class="ident">resp</div><div class="operator">[</div><div class="literal">&#34;account&#34;</div><div class="operator">]</div> <div class="operator">=</div> <div class="ident">account</div><div class="operator"></div>

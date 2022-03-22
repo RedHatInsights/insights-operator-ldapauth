@@ -102,7 +102,7 @@
       <tr class="section">
 	<td class="doc"></td>
 	<td class="code"><pre><code><div class="comment">/*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 you may not use this file except in compliance with the License.
@@ -139,18 +139,18 @@ https://redhatinsights.github.io/insights-operator-ldapauth/packages/main.html</
 	<div class="literal">&#34;crypto/x509&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;flag&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;fmt&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;github.com/RedHatInsights/insights-operator-utils/env&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;github.com/redhatinsights/insights-operator-ldapauth/server&#34;</div><div class="operator"></div>
-	<div class="literal">&#34;github.com/redhatinsights/insights-operator-utils/env&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;github.com/spf13/viper&#34;</div><div class="operator"></div>
-	<div class="literal">&#34;io/ioutil&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;log&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;net/http&#34;</div><div class="operator"></div>
+	<div class="literal">&#34;os&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;path/filepath&#34;</div><div class="operator"></div>
 	<div class="literal">&#34;strings&#34;</div><div class="operator"></div>
 <div class="operator">)</div><div class="operator"></div>
 
 <div class="keyword">func</div> <div class="ident">createTLS</div><div class="operator">(</div><div class="ident">tlsCert</div><div class="operator">,</div> <div class="ident">tlsKey</div> <div class="ident">string</div><div class="operator">)</div> <div class="ident">http</div><div class="operator">.</div><div class="ident">RoundTripper</div> <div class="operator">{</div>
-	<div class="ident">caCert</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">ioutil</div><div class="operator">.</div><div class="ident">ReadFile</div><div class="operator">(</div><div class="ident">tlsCert</div><div class="operator">)</div><div class="operator"></div>
+	<div class="ident">caCert</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">os</div><div class="operator">.</div><div class="ident">ReadFile</div><div class="operator">(</div><div class="ident">tlsCert</div><div class="operator">)</div><div class="operator"></div>
 	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">{</div>
 		<div class="ident">log</div><div class="operator">.</div><div class="ident">Fatal</div><div class="operator">(</div><div class="ident">err</div><div class="operator">)</div><div class="operator"></div>
 	<div class="operator">}</div><div class="operator"></div>
