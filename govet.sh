@@ -16,4 +16,5 @@
 
 cd "$(dirname "$0")" || exit
 
-go vet `go list ./...`
+# shellcheck disable=SC2046
+go vet $(go list ./...)
