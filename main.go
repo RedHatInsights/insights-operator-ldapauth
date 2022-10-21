@@ -57,6 +57,7 @@ func createTLS(tlsCert, tlsKey string) http.RoundTripper {
 		TLSClientConfig: &tls.Config{
 			RootCAs:      caCertPool,
 			Certificates: []tls.Certificate{cert},
+			MinVersion:   tls.VersionTLS12,
 		},
 	}
 	return transport
