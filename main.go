@@ -43,7 +43,7 @@ import (
 
 func createTLS(tlsCert, tlsKey string) http.RoundTripper {
 	// disable "G304 (CWE-22): Potential file inclusion via variable"
-	caCert, err := os.ReadFile(tlsCert)
+	caCert, err := os.ReadFile(tlsCert) // #nosec G304
 	if err != nil {
 		log.Fatal(err)
 	}
