@@ -88,7 +88,7 @@ func (s Server) Initialize() {
 
 	log.Println("Starting HTTP server at", s.Address)
 
-	err := http.ListenAndServe(s.Address, router)
+	err := http.ListenAndServe(s.Address, router) // #nosec G114
 	if err != nil {
 		log.Fatal("Unable to initialize HTTP server", err)
 		os.Exit(2)
