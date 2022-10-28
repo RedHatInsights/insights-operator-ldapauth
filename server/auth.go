@@ -64,7 +64,7 @@ func (s *Server) Login(writer http.ResponseWriter, request *http.Request) {
 }
 
 // JWTAuthentication - middleware for authenticate user by Token
-func (s Server) JWTAuthentication(next http.Handler) http.Handler {
+func (s *Server) JWTAuthentication(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
