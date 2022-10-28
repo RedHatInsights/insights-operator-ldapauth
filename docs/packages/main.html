@@ -150,7 +150,13 @@ https://redhatinsights.github.io/insights-operator-ldapauth/packages/main.html</
 <div class="operator">)</div><div class="operator"></div>
 
 <div class="keyword">func</div> <div class="ident">createTLS</div><div class="operator">(</div><div class="ident">tlsCert</div><div class="operator">,</div> <div class="ident">tlsKey</div> <div class="ident">string</div><div class="operator">)</div> <div class="ident">http</div><div class="operator">.</div><div class="ident">RoundTripper</div> <div class="operator">{</div>
-	<div class="ident">caCert</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">os</div><div class="operator">.</div><div class="ident">ReadFile</div><div class="operator">(</div><div class="ident">tlsCert</div><div class="operator">)</div><div class="operator"></div>
+</code></pre></td>
+      </tr>
+      
+      <tr class="section">
+	<td class="doc"><p>disable &quot;G304 (CWE-22): Potential file inclusion via variable&quot;</p>
+</td>
+	<td class="code"><pre><code>	<div class="ident">caCert</div><div class="operator">,</div> <div class="ident">err</div> <div class="operator">:=</div> <div class="ident">os</div><div class="operator">.</div><div class="ident">ReadFile</div><div class="operator">(</div><div class="ident">tlsCert</div><div class="operator">)</div> <div class="operator"></div><div class="comment">// #nosec G304</div>
 	<div class="keyword">if</div> <div class="ident">err</div> <div class="operator">!=</div> <div class="ident">nil</div> <div class="operator">{</div>
 		<div class="ident">log</div><div class="operator">.</div><div class="ident">Fatal</div><div class="operator">(</div><div class="ident">err</div><div class="operator">)</div><div class="operator"></div>
 	<div class="operator">}</div><div class="operator"></div>
@@ -170,6 +176,7 @@ https://redhatinsights.github.io/insights-operator-ldapauth/packages/main.html</
 		<div class="ident">TLSClientConfig</div><div class="operator">:</div> <div class="operator">&amp;</div><div class="ident">tls</div><div class="operator">.</div><div class="ident">Config</div><div class="operator">{</div>
 			<div class="ident">RootCAs</div><div class="operator">:</div>      <div class="ident">caCertPool</div><div class="operator">,</div>
 			<div class="ident">Certificates</div><div class="operator">:</div> <div class="operator">[</div><div class="operator">]</div><div class="ident">tls</div><div class="operator">.</div><div class="ident">Certificate</div><div class="operator">{</div><div class="ident">cert</div><div class="operator">}</div><div class="operator">,</div>
+			<div class="ident">MinVersion</div><div class="operator">:</div>   <div class="ident">tls</div><div class="operator">.</div><div class="ident">VersionTLS12</div><div class="operator">,</div>
 		<div class="operator">}</div><div class="operator">,</div>
 	<div class="operator">}</div><div class="operator"></div>
 	<div class="keyword">return</div> <div class="ident">transport</div><div class="operator"></div>

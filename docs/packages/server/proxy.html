@@ -102,7 +102,7 @@
       <tr class="section">
 	<td class="doc"></td>
 	<td class="code"><pre><code><div class="comment">/*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 you may not use this file except in compliance with the License.
@@ -141,7 +141,7 @@ https://redhatinsights.github.io/insights-operator-ldapauth/packages/server/prox
       <tr class="section">
 	<td class="doc"><p>HandleHTTP handle all routes, used for proxying them to controller</p>
 </td>
-	<td class="code"><pre><code><div class="keyword">func</div> <div class="operator">(</div><div class="ident">s</div> <div class="ident">Server</div><div class="operator">)</div> <div class="ident">HandleHTTP</div><div class="operator">(</div><div class="ident">w</div> <div class="ident">http</div><div class="operator">.</div><div class="ident">ResponseWriter</div><div class="operator">,</div> <div class="ident">req</div> <div class="operator">*</div><div class="ident">http</div><div class="operator">.</div><div class="ident">Request</div><div class="operator">)</div> <div class="operator">{</div>
+	<td class="code"><pre><code><div class="keyword">func</div> <div class="operator">(</div><div class="ident">s</div> <div class="operator">*</div><div class="ident">Server</div><div class="operator">)</div> <div class="ident">HandleHTTP</div><div class="operator">(</div><div class="ident">w</div> <div class="ident">http</div><div class="operator">.</div><div class="ident">ResponseWriter</div><div class="operator">,</div> <div class="ident">req</div> <div class="operator">*</div><div class="ident">http</div><div class="operator">.</div><div class="ident">Request</div><div class="operator">)</div> <div class="operator">{</div>
 	<div class="ident">log</div><div class="operator">.</div><div class="ident">Println</div><div class="operator">(</div><div class="literal">&#34;Proxying to&#34;</div><div class="operator">,</div> <div class="ident">s</div><div class="operator">.</div><div class="ident">Proxy</div><div class="operator">)</div><div class="operator"></div>
 	<div class="ident">tempURL</div><div class="operator">,</div> <div class="ident">_</div> <div class="operator">:=</div> <div class="ident">url</div><div class="operator">.</div><div class="ident">Parse</div><div class="operator">(</div><div class="ident">s</div><div class="operator">.</div><div class="ident">Proxy</div><div class="operator">)</div><div class="operator"></div>
 	<div class="ident">req</div><div class="operator">.</div><div class="ident">URL</div><div class="operator">.</div><div class="ident">Host</div> <div class="operator">=</div> <div class="ident">tempURL</div><div class="operator">.</div><div class="ident">Host</div><div class="operator"></div>
