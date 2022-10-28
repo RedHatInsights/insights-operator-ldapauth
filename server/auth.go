@@ -37,7 +37,7 @@ const (
 )
 
 // Login handler for login route
-func (s Server) Login(writer http.ResponseWriter, request *http.Request) {
+func (s *Server) Login(writer http.ResponseWriter, request *http.Request) {
 	account := &auth.Account{}
 
 	// decode the request body into struct and failed if any error occur
