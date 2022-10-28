@@ -1,5 +1,5 @@
 /*
-Copyright © 2019, 2020 Red Hat, Inc.
+Copyright © 2019, 2020, 2021, 2022 Red Hat, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import (
 )
 
 // HandleHTTP handle all routes, used for proxying them to controller
-func (s Server) HandleHTTP(w http.ResponseWriter, req *http.Request) {
+func (s *Server) HandleHTTP(w http.ResponseWriter, req *http.Request) {
 	log.Println("Proxying to", s.Proxy)
 	tempURL, _ := url.Parse(s.Proxy)
 	req.URL.Host = tempURL.Host
