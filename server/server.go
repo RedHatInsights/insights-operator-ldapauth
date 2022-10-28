@@ -76,7 +76,7 @@ func (s *Server) addDefaultHeaders(nextHandler http.Handler) http.Handler {
 }
 
 // Initialize main function that start server
-func (s Server) Initialize() {
+func (s *Server) Initialize() {
 	log.Println("API Prefix: ", APIPrefix)
 	router := mux.NewRouter().StrictSlash(true)
 	router.Use(logRequest)
