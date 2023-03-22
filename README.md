@@ -19,6 +19,7 @@
 * [Starting](#starting)
 * [Authentication](#authentication)
 * [RestAPI](#restapi)
+* [BDD tests](#bdd-tests)
 * [Code style and cyclomatic complexity checks](#code-style-and-cyclomatic-complexity-checks)
 * [Configuration](#configuration)
     * [Environment variables](#environment-variables)
@@ -76,6 +77,17 @@ For now it connecting directly to RedHat LDAP, so for running this application c
 ## RestAPI
 
 Application has only one route is `/api/v1/login`, requests to other routes will be proxied to `insights-operator-controller`.
+
+## BDD tests
+
+Behaviour tests for this service are included in [Insights Behavioral
+Spec](https://github.com/RedHatInsights/insights-behavioral-spec) repository.
+In order to run these tests, the following steps need to be made:
+
+1. clone the [Insights Behavioral Spec](https://github.com/RedHatInsights/insights-behavioral-spec) repository
+1. go into the cloned subdirectory `insights-behavioral-spec`
+1. run the `aggregator_tests.sh` from this subdirectory
+
 
 ## Code style and cyclomatic complexity checks
 
